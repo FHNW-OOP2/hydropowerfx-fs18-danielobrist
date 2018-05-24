@@ -1,14 +1,15 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+
+import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 
-public class RootPanel extends StackPane implements ViewMixin {
+
+public class RootPanel extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
 
-    private Button button;
+    private Header header;
 
     public RootPanel(RootPM model) {
         this.rootPM = model;
@@ -23,16 +24,17 @@ public class RootPanel extends StackPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        button = new Button();
+        header = new Header(rootPM);
+
     }
 
     @Override
     public void layoutControls() {
-        getChildren().add(button);
+        setTop(header);
+
     }
 
     @Override
     public void setupBindings() {
-        button.textProperty().bind(rootPM.greetingProperty());
     }
 }
