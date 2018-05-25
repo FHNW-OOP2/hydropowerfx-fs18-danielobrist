@@ -10,6 +10,8 @@ public class RootPanel extends BorderPane implements ViewMixin {
     private final RootPM rootPM;
 
     private Header header;
+    private Form form;
+    private Table table;
 
     public RootPanel(RootPM model) {
         this.rootPM = model;
@@ -25,12 +27,16 @@ public class RootPanel extends BorderPane implements ViewMixin {
     @Override
     public void initializeControls() {
         header = new Header(rootPM);
+        form = new Form(rootPM);
+        table = new Table(rootPM);
 
     }
 
     @Override
     public void layoutControls() {
         setTop(header);
+        setRight(form);
+        setLeft(table);
 
     }
 

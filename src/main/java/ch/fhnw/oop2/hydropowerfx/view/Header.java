@@ -2,9 +2,10 @@ package ch.fhnw.oop2.hydropowerfx.view;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class Header extends VBox implements ViewMixin {
+public class Header extends HBox implements ViewMixin {
 
     private final RootPM hydroMangament;
 
