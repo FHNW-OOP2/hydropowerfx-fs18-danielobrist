@@ -22,8 +22,8 @@ public class HydroForm extends GridPane implements ViewMixin {
     private Label     idField;
     private Label     nameLabel;
     private TextField nameField;
-    private Label     areaLabel;
-    private TextField areaField;
+    private Label siteLabel;
+    private TextField siteField;
 
     public HydroForm(RootPM root){
         this.root = root;
@@ -43,8 +43,8 @@ public class HydroForm extends GridPane implements ViewMixin {
         nameLabel = new Label("Name");
         nameField = new TextField();
 
-        areaLabel = new Label("Fläche in km\u00B2"); //unicode character verwenden
-        areaField = new TextField();
+        siteLabel = new Label("Site"); //unicode character verwenden
+        siteField = new TextField();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         addRow(0, idLabel  , idField);
         addRow(1, nameLabel, nameField);
-        addRow(2, areaLabel, areaField);
+        addRow(2, siteLabel, siteField);
     }
     @Override
     public void setupValueChangedListeners() {
@@ -66,13 +66,13 @@ public class HydroForm extends GridPane implements ViewMixin {
             if (oldSelection != null) {
                 idField.textProperty()  .unbind();
                 nameField.textProperty().unbindBidirectional(oldSelection.nameProperty());
-                areaField.textProperty().unbindBidirectional(oldSelection.powerplantMaxPowerProperty());
+                siteField.textProperty().unbindBidirectional(oldSelection.powerplantMaxPowerProperty());
             }
 
             if (newSelection != null) {
                 idField.textProperty()  .bind             (newSelection.powerplantIDProperty().asString());
                 nameField.textProperty().bindBidirectional(newSelection.nameProperty());
-                areaField.textProperty().bindBidirectional(newSelection.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
+                siteField.textProperty().bindBidirectional(newSelection.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
             }
         });
     }

@@ -1,7 +1,16 @@
 package ch.fhnw.oop2.hydropowerfx.presentationmodel;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,6 +20,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class RootPM {
+    private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
+    private static final String DELIMITER = "\t";
+
     private final StringProperty applicationTitle = new SimpleStringProperty("HydroPowerFX");
     private final IntegerProperty selectedPowerplantId = new SimpleIntegerProperty(-1);
 
@@ -19,14 +31,57 @@ public class RootPM {
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
 
     public RootPM() {
-        this(createAllPowerplants());
+        allPowerplants.addAll(readFromFile());
+    }
+
+    private List<PowerplantsPM> readFromFile() {
+        try (Stream<String> stream = getStreamOfLines(FILE_NAME)) {
+            return stream.skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
+                    .map(line -> new PowerplantsPM(line.split(DELIMITER, 14))) // aus jeder Zeile ein Objekt machen
+                    .collect(Collectors.toList());                        // alles aufsammeln
+        }
+    }
+//  ENTITY_ID;NAME;TYPE;SITE;CANTON;MAX_WATER_VOLUME_M3_S;MAX_POWER_MW;START_OF_OPERATION_FIRST;START_OF_OPERATION_LAST;LATITUDE;LONGITUDE;STATUS;WATERBODIES;IMAGE_URL
+    public void save() {
+        try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))) {
+            writer.write("ID\tNAME\tTYPE\tSITE\tCANTON\tMAX_WATER_VOLUME_M3_S\tMAX_POWER_MW\tSTART_OF_OPERATION_FIRST\tSTART_OF_OPERATION_LAST\tLATITUDE\tLONGITUDE\tSTATUS\tWATERBODIES\tIMAGE_URL");
+            writer.newLine();
+            allPowerplants.stream()
+                    .map(powerplant -> powerplant.infoAsLine(DELIMITER))
+                    .forEach(line -> {
+                        try {
+                            writer.write(line);
+                            writer.newLine();
+                        } catch (IOException e) {
+                            throw new IllegalStateException(e);
+                        }
+                    });
+        } catch (IOException e) {
+            throw new IllegalStateException("save failed");
+        }
+    }
+
+    private Stream<String> getStreamOfLines(String fileName) {
+        try {
+            return Files.lines(getPath(fileName), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private Path getPath(String fileName)  {
+        try {
+            return Paths.get(getClass().getResource(fileName).toURI());
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     public RootPM(PowerplantsPM... powerplants) {
         this(Arrays.asList(powerplants));
     }
 
-    private RootPM(List<PowerplantsPM> hydroList) {
+    public RootPM(List<PowerplantsPM> hydroList) {
         allPowerplants.addAll(hydroList);
 
         selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> {
@@ -65,14 +120,6 @@ public class RootPM {
                 .filter(powerplantsPM -> powerplantsPM.getPowerplantID() == id)
                 .findAny()
                 .orElse(null);
-    }
-
-    private static List<PowerplantsPM> createAllPowerplants() {
-        return List.of(new PowerplantsPM(0, "Schweiz"    , 41_285.00),
-                new PowerplantsPM(1, "Deutschland", 357_121.41),
-                new PowerplantsPM(2, "Frankreich" , 668_763.00),
-                new PowerplantsPM(3, "Italien"    , 301_338.00),
-                new PowerplantsPM(4, "Oesterreich",  83_878.99));
     }
 
     public ObservableList<PowerplantsPM> allPowerplants() {

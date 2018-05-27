@@ -2,19 +2,18 @@ package ch.fhnw.oop2.hydropowerfx.view;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 
-public class HydroTable extends HBox implements ViewMixin {
+public class HydroTable extends VBox implements ViewMixin {
 
     private final RootPM root;
 
-    private Slider slider;
-    private TextField inputField;
-    private ComboBox<PowerplantsPM> comboBox;
+    private TableView<PowerplantsPM> tabelle;   //Tabellenansicht mit Kraftwerken auf jeder Zeile
+    private Label HYDROLABEL;
 
     public HydroTable(RootPM root) {
         this.root = root;
@@ -28,30 +27,41 @@ public class HydroTable extends HBox implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        slider = new Slider();
-        slider.setMin(0.0);
-        slider.setMax(root.allPowerplants().size() - 1);
+        tabelle = initializePowerplantTabelle();
+        HYDROLABEL = new Label();
+    }
 
-        inputField = new TextField();
-        comboBox = new ComboBox<>(root.allPowerplants());
+    private TableView<PowerplantsPM> initializePowerplantTabelle() {
+        TableView<PowerplantsPM> tableView = new TableView<>(root.allPowerplants());
+
+        TableColumn<PowerplantsPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
+        nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
+
+        TableColumn<PowerplantsPM, Number> idCol = new TableColumn<>("ID"); //ACHTUNG: Integer geht nicht, man muss Number nehmen als Typparameter!
+        idCol.setCellValueFactory(cell ->  cell.getValue().powerplantIDProperty());
+
+        TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Max Power");
+        maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());
+
+        tableView.getColumns().addAll(nameCol, idCol, maxpowerCol);
+
+        return tableView;
     }
 
     @Override
     public void layoutControls() {
-        getChildren().addAll(slider, inputField, comboBox);
+        setVgrow(tabelle, Priority.ALWAYS);
+
+        getChildren().addAll(tabelle, HYDROLABEL);
     }
 
     @Override
     public void setupBindings() {
-        slider.valueProperty()   .bindBidirectional(root.selectedPowerplantIdProperty());
-        inputField.textProperty().bindBidirectional(root.selectedPowerplantIdProperty(), new NumberStringConverter());
+
     }
 
     @Override
     public void setupValueChangedListeners() {
-        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> root.setSelectedPowerplantId(newValue.getPowerplantID()));
-
-        root.selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> comboBox.getSelectionModel().select((int) newValue));
     }
 
 }
