@@ -4,7 +4,6 @@ import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class HydroHeader extends VBox implements ViewMixin {
@@ -40,6 +39,6 @@ public class HydroHeader extends VBox implements ViewMixin {
         PowerplantsPM proxy = root.getHydroProxy();
 
         nameLabel.textProperty().bind(proxy.nameProperty());
-        areaLabel.textProperty().bind(proxy.areaProperty().asString("%.2f km\u00B2"));
+        areaLabel.textProperty().bind(proxy.powerplantMaxPowerProperty().asString("%.2f km\u00B2"));
     }
 }

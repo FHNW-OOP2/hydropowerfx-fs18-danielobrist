@@ -49,7 +49,7 @@ public class HydroTable extends HBox implements ViewMixin {
 
     @Override
     public void setupValueChangedListeners() {
-        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> root.setSelectedPowerplantId(newValue.getId()));
+        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> root.setSelectedPowerplantId(newValue.getPowerplantID()));
 
         root.selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> comboBox.getSelectionModel().select((int) newValue));
     }

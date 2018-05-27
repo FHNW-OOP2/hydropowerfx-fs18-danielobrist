@@ -66,13 +66,13 @@ public class HydroForm extends GridPane implements ViewMixin {
             if (oldSelection != null) {
                 idField.textProperty()  .unbind();
                 nameField.textProperty().unbindBidirectional(oldSelection.nameProperty());
-                areaField.textProperty().unbindBidirectional(oldSelection.areaProperty());
+                areaField.textProperty().unbindBidirectional(oldSelection.powerplantMaxPowerProperty());
             }
 
             if (newSelection != null) {
-                idField.textProperty()  .bind             (newSelection.idProperty().asString());
+                idField.textProperty()  .bind             (newSelection.powerplantIDProperty().asString());
                 nameField.textProperty().bindBidirectional(newSelection.nameProperty());
-                areaField.textProperty().bindBidirectional(newSelection.areaProperty(), new NumberStringConverter(new Locale("de", "CH")));
+                areaField.textProperty().bindBidirectional(newSelection.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
             }
         });
     }

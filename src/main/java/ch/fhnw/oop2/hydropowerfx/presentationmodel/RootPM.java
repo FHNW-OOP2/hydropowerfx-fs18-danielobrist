@@ -49,20 +49,20 @@ public class RootPM {
     }
 
     private void bindToProxy(PowerplantsPM powerplant) {
-        hydroProxy.idProperty()  .bindBidirectional(powerplant.idProperty());
+        hydroProxy.powerplantIDProperty()  .bindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().bindBidirectional(powerplant.nameProperty());
-        hydroProxy.areaProperty().bindBidirectional(powerplant.areaProperty());
+        hydroProxy.powerplantMaxPowerProperty().bindBidirectional(powerplant.powerplantMaxPowerProperty());
     }
 
     private void unbindFromProxy(PowerplantsPM powerplant) {
-        hydroProxy.idProperty()  .unbindBidirectional(powerplant.idProperty());
+        hydroProxy.powerplantIDProperty()  .unbindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().unbindBidirectional(powerplant.nameProperty());
-        hydroProxy.areaProperty().unbindBidirectional(powerplant.areaProperty());
+        hydroProxy.powerplantMaxPowerProperty().unbindBidirectional(powerplant.powerplantMaxPowerProperty());
     }
 
     public PowerplantsPM getPowerplant(int id) {
         return allPowerplants.stream()
-                .filter(powerplantsPM -> powerplantsPM.getId() == id)
+                .filter(powerplantsPM -> powerplantsPM.getPowerplantID() == id)
                 .findAny()
                 .orElse(null);
     }
