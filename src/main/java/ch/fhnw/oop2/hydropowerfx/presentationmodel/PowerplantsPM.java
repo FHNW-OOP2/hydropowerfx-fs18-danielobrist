@@ -228,15 +228,15 @@ public class PowerplantsPM {
     }
 
     public String getName() {
-        return name.get();
+        return powerplantName.get();
     }
 
     public StringProperty nameProperty() {
-        return name;
+        return powerplantName;
     }
 
     public void setName(String name) {
-        this.name.set(name);
+        this.powerplantName.set(name);
     }
 
     public double getPowerplantMaxPower() {
