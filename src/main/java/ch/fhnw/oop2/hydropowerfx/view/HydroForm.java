@@ -22,8 +22,8 @@ public class HydroForm extends GridPane implements ViewMixin {
     private Label     idField;
     private Label     nameLabel;
     private TextField nameField;
-    private Label siteLabel;
-    private TextField siteField;
+    private Label maxPowerLabel;
+    private TextField maxPowerField;
 
     public HydroForm(RootPM root){
         this.root = root;
@@ -43,8 +43,8 @@ public class HydroForm extends GridPane implements ViewMixin {
         nameLabel = new Label("Name");
         nameField = new TextField();
 
-        siteLabel = new Label("Site"); //unicode character verwenden
-        siteField = new TextField();
+        maxPowerLabel = new Label("Max Power"); //unicode character für hochgestellte Zahlen
+        maxPowerField = new TextField();
     }
 
     @Override
@@ -55,26 +55,15 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         addRow(0, idLabel  , idField);
         addRow(1, nameLabel, nameField);
-        addRow(2, siteLabel, siteField);
+        addRow(2, maxPowerLabel, maxPowerField);
     }
     @Override
-    public void setupValueChangedListeners() {
-        root.selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> {
-            PowerplantsPM oldSelection = root.getPowerplant(oldValue.intValue());
-            PowerplantsPM newSelection = root.getPowerplant(newValue.intValue());
+    public void setupBindings() {
+        PowerplantsPM proxy = root.getHydroProxy();
 
-            if (oldSelection != null) {
-                idField.textProperty()  .unbind();
-                nameField.textProperty().unbindBidirectional(oldSelection.nameProperty());
-                siteField.textProperty().unbindBidirectional(oldSelection.powerplantMaxPowerProperty());
-            }
-
-            if (newSelection != null) {
-                idField.textProperty()  .bind             (newSelection.powerplantIDProperty().asString());
-                nameField.textProperty().bindBidirectional(newSelection.nameProperty());
-                siteField.textProperty().bindBidirectional(newSelection.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
-            }
-        });
+        idField.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
+        nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());
+        maxPowerField.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
     }
 
 

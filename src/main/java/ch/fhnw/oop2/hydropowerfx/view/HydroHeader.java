@@ -11,7 +11,7 @@ public class HydroHeader extends VBox implements ViewMixin {
     private final RootPM root;
 
     private Label nameLabel;
-    private Label areaLabel;
+    private Label idLabel;
 
     public HydroHeader(RootPM root) {
         this.root = root;
@@ -26,12 +26,12 @@ public class HydroHeader extends VBox implements ViewMixin {
     @Override
     public void initializeControls() {
         nameLabel = new Label();
-        areaLabel = new Label();
+        idLabel = new Label();
     }
 
     @Override
     public void layoutControls() {
-        getChildren().addAll(nameLabel, areaLabel);
+        getChildren().addAll(nameLabel, idLabel);
     }
 
     @Override
@@ -39,6 +39,6 @@ public class HydroHeader extends VBox implements ViewMixin {
         PowerplantsPM proxy = root.getHydroProxy();
 
         nameLabel.textProperty().bind(proxy.nameProperty());
-        areaLabel.textProperty().bind(proxy.powerplantMaxPowerProperty().asString("%.2f km\u00B2"));
+        idLabel.textProperty().bind(proxy.powerplantMaxPowerProperty().asString());
     }
 }

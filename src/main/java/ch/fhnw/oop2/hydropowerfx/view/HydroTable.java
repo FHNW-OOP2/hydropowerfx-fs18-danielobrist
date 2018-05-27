@@ -2,7 +2,9 @@ package ch.fhnw.oop2.hydropowerfx.view;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -22,7 +24,7 @@ public class HydroTable extends VBox implements ViewMixin {
 
     @Override
     public void initializeSelf() {
-        getStyleClass().add("selectorbar");
+        getStyleClass().add("table");
     }
 
     @Override
@@ -48,15 +50,19 @@ public class HydroTable extends VBox implements ViewMixin {
         return tableView;
     }
 
+
     @Override
     public void layoutControls() {
         setVgrow(tabelle, Priority.ALWAYS);
 
         getChildren().addAll(tabelle, HYDROLABEL);
+
     }
 
     @Override
     public void setupBindings() {
+        PowerplantsPM proxy = root.getHydroProxy();
+
 
     }
 

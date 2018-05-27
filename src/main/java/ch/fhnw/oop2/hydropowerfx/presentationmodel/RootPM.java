@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
-    private static final String DELIMITER = "\t";
+    private static final String DELIMITER = ";";
 
     private final StringProperty applicationTitle = new SimpleStringProperty("HydroPowerFX");
     private final IntegerProperty selectedPowerplantId = new SimpleIntegerProperty(-1);
