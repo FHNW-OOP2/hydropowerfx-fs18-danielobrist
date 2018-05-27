@@ -15,3 +15,10 @@
     -fx-effect          : innershadow(two-pass-box, black, 10, 0, 0, 0);
 
 }
+.selectorbar {
+    -fx-padding         : 20;
+    -fx-spacing         : 20;
+    -fx-alignment       : center;
+    -fx-background-color: linear-gradient(#e8bfc6 0%, #e8adb0 25%, #e894a1 100%);
+    -fx-effect          : innershadow(two-pass-box, black, 10, 0, 0, 0);
+}

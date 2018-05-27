@@ -1,21 +1,19 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
-
 import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 
 
 public class RootPanel extends BorderPane implements ViewMixin {
-    private final RootPM rootPM;
+    private final RootPM model;
 
-    private Header header;
-    private Form form;
-    private Table table;
+    private HydroHeader header;
+    private HydroForm form;
+    private HydroTable table;
 
     public RootPanel(RootPM model) {
-        this.rootPM = model;
-
+        this.model = model;
         init();
     }
 
@@ -26,9 +24,9 @@ public class RootPanel extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        header = new Header(rootPM);
-        form = new Form(rootPM);
-        table = new Table(rootPM);
+        header = new HydroHeader(model);
+        form = new HydroForm(model);
+        table = new HydroTable(model);
 
     }
 
@@ -38,9 +36,5 @@ public class RootPanel extends BorderPane implements ViewMixin {
         setRight(form);
         setLeft(table);
 
-    }
-
-    @Override
-    public void setupBindings() {
     }
 }

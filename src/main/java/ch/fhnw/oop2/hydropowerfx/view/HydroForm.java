@@ -1,15 +1,22 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
+import java.util.Locale;
+
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.util.converter.NumberStringConverter;
 
-public class Form extends GridPane implements ViewMixin {
 
-    private final RootPM rootpm;
+
+public class HydroForm extends GridPane implements ViewMixin {
+
+    private final RootPM root;
 
     private Label idLabel;
     private Label     idField;
@@ -18,8 +25,8 @@ public class Form extends GridPane implements ViewMixin {
     private Label     areaLabel;
     private TextField areaField;
 
-    public Form(RootPM rootpm){
-        this.rootpm = rootpm;
+    public HydroForm(RootPM root){
+        this.root = root;
         init();
     }
 
@@ -50,10 +57,25 @@ public class Form extends GridPane implements ViewMixin {
         addRow(1, nameLabel, nameField);
         addRow(2, areaLabel, areaField);
     }
-
     @Override
     public void setupValueChangedListeners() {
+        root.selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> {
+            PowerplantsPM oldSelection = root.getPowerplant(oldValue.intValue());
+            PowerplantsPM newSelection = root.getPowerplant(newValue.intValue());
 
+            if (oldSelection != null) {
+                idField.textProperty()  .unbind();
+                nameField.textProperty().unbindBidirectional(oldSelection.nameProperty());
+                areaField.textProperty().unbindBidirectional(oldSelection.areaProperty());
+            }
+
+            if (newSelection != null) {
+                idField.textProperty()  .bind             (newSelection.idProperty().asString());
+                nameField.textProperty().bindBidirectional(newSelection.nameProperty());
+                areaField.textProperty().bindBidirectional(newSelection.areaProperty(), new NumberStringConverter(new Locale("de", "CH")));
+            }
+        });
     }
+
 
 }

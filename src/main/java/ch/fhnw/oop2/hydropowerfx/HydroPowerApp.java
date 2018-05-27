@@ -12,15 +12,18 @@ public class HydroPowerApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		RootPM rootPM    = new RootPM();
-		Parent rootPanel = new RootPanel(rootPM);
+		RootPM model    = new RootPM();
+
+		Parent rootPanel = new RootPanel(model);
 
 		Scene scene = new Scene(rootPanel);
 
-		primaryStage.titleProperty().bind(rootPM.applicationTitleProperty());
+		primaryStage.titleProperty().bind(model.applicationTitleProperty());
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
+
+		model.setSelectedPowerplantId(0);
 	}
 
 	public static void main(String[] args) {

@@ -1,19 +1,21 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class Header extends HBox implements ViewMixin {
+public class HydroHeader extends VBox implements ViewMixin {
 
-    private final RootPM hydroMangament;
+    private final RootPM root;
 
     private Label nameLabel;
     private Label areaLabel;
 
-    public Header(RootPM hydroManagement) {
-        this.hydroMangament = hydroManagement;
+    public HydroHeader(RootPM root) {
+        this.root = root;
         init();
     }
 
@@ -34,7 +36,10 @@ public class Header extends HBox implements ViewMixin {
     }
 
     @Override
-    public void setupValueChangedListeners() {
+    public void setupBindings() {
+        PowerplantsPM proxy = root.getHydroProxy();
 
+        nameLabel.textProperty().bind(proxy.nameProperty());
+        areaLabel.textProperty().bind(proxy.areaProperty().asString("%.2f km\u00B2"));
     }
 }
