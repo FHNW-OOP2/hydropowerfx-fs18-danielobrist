@@ -2,6 +2,7 @@ package ch.fhnw.oop2.hydropowerfx.view;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
 public class CantonOverview extends VBox implements ViewMixin {

@@ -18,9 +18,14 @@ public class HydroForm extends GridPane implements ViewMixin {
 
     private final RootPM root;
 
+    //  ENTITY_ID;NAME;TYPE;SITE;CANTON;MAX_WATER_VOLUME_M3_S;MAX_POWER_MW;START_OF_OPERATION_FIRST;START_OF_OPERATION_LAST;LATITUDE;LONGITUDE;STATUS;WATERBODIES;IMAGE_URL
+
+
     private Label idIndex;
     private Label nameIndex;
     private Label maxPowerIndex;
+    private Label siteIndex;
+    private Label operationstartFirstIndex;
 
 
     private Label idLabel;
@@ -51,6 +56,10 @@ public class HydroForm extends GridPane implements ViewMixin {
         maxPowerLabel = new Label("Max Power"); //unicode character für hochgestellte Zahlen
         maxPowerField = new TextField();
         maxPowerIndex = new Label();
+
+        siteIndex = new Label();
+
+        operationstartFirstIndex = new Label();
     }
 
     @Override
@@ -60,11 +69,14 @@ public class HydroForm extends GridPane implements ViewMixin {
         getColumnConstraints().addAll(new ColumnConstraints(), grow);
 
         addRow(0, nameIndex);
+        addRow(1, siteIndex);
+        addRow(3, maxPowerIndex);
+        addRow(4, operationstartFirstIndex);
 
 
-        addRow(4, idLabel  , idIndex);
-        addRow(5, nameLabel, nameField);
-        addRow(6, maxPowerLabel, maxPowerField);
+        addRow(6, idLabel  , idIndex);
+        addRow(7, nameLabel, nameField);
+        addRow(8, maxPowerLabel, maxPowerField);
     }
     @Override
     public void setupBindings() {

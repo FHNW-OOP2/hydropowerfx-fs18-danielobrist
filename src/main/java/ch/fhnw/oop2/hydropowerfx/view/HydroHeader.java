@@ -3,6 +3,7 @@ package ch.fhnw.oop2.hydropowerfx.view;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -12,6 +13,7 @@ public class HydroHeader extends VBox implements ViewMixin {
 
     private Label nameLabel;
     private Label idLabel;
+    private Button addButton;
 
     public HydroHeader(RootPM root) {
         this.root = root;
@@ -27,11 +29,13 @@ public class HydroHeader extends VBox implements ViewMixin {
     public void initializeControls() {
         nameLabel = new Label();
         idLabel = new Label();
+        addButton = new Button();
     }
 
     @Override
     public void layoutControls() {
-        getChildren().addAll(nameLabel, idLabel);
+
+        getChildren().addAll(addButton, nameLabel, idLabel);
     }
 
     @Override
@@ -41,4 +45,5 @@ public class HydroHeader extends VBox implements ViewMixin {
         nameLabel.textProperty().bind(proxy.nameProperty());
         idLabel.textProperty().bind(proxy.powerplantMaxPowerProperty().asString());
     }
+
 }

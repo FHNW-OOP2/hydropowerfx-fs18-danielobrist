@@ -30,6 +30,7 @@ public class RootPM {
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
 
+
     public RootPM() {
         allPowerplants.addAll(readFromFile());
     }
