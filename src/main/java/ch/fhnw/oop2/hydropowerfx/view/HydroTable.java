@@ -34,7 +34,7 @@ public class HydroTable extends VBox implements ViewMixin {
     }
 
     private TableView<PowerplantsPM> initializePowerplantTabelle() {
-        TableView<PowerplantsPM> tableView = new TableView<>(root.allPowerplants());
+        TableView<PowerplantsPM> tableView = new TableView<>(root.getAllPowerplants());
 
         TableColumn<PowerplantsPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
         nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
@@ -68,12 +68,20 @@ public class HydroTable extends VBox implements ViewMixin {
 
     @Override
     public void setupValueChangedListeners() {
-        tabelle.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                PowerplantsPM selectedItem = (PowerplantsPM) newValue;
-                root.setSelectedPowerplantId(selectedItem.getPowerplantID());
-                //not working, need bindings?
-            }
+        //tabelle.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+         //   if (newValue != null) {
+          //      System.out.println(root.getHydroProxy().getName());
+            //    root.setSelectedPowerplantId(newValue.getPowerplantID());
+              //  System.out.println(root.getHydroProxy().getName());
+        // }
+       // });
+
+        tabelle.setOnMouseClicked(event -> {
+            TableView source = (TableView) event.getSource();
+
+            PowerplantsPM wasserwerk = (PowerplantsPM) source.getSelectionModel().getSelectedItem();
+            root.setSelectedPowerplantId(wasserwerk.getPowerplantID());
+            System.out.print(root.getHydroProxy().getPowerplantID());
         });
     }
 

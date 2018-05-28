@@ -33,6 +33,19 @@ public class RootPM {
 
     public RootPM() {
         allPowerplants.addAll(readFromFile());
+        selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> {
+                    PowerplantsPM oldSelection = getPowerplant(oldValue.intValue());
+                    PowerplantsPM newSelection = getPowerplant(newValue.intValue());
+
+                    if (oldSelection != null) {
+                        unbindFromProxy(oldSelection);
+                    }
+
+                    if (newSelection != null) {
+                        bindToProxy(newSelection);
+                    }
+                }
+        );
     }
 
     private List<PowerplantsPM> readFromFile() {
@@ -77,29 +90,7 @@ public class RootPM {
             throw new IllegalArgumentException(e);
         }
     }
-
-    public RootPM(PowerplantsPM... powerplants) {
-        this(Arrays.asList(powerplants));
-    }
-
-    public RootPM(List<PowerplantsPM> hydroList) {
-        allPowerplants.addAll(hydroList);
-
-        selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> {
-                    PowerplantsPM oldSelection = getPowerplant(oldValue.intValue());
-                    PowerplantsPM newSelection = getPowerplant(newValue.intValue());
-
-                    if (oldSelection != null) {
-                        unbindFromProxy(oldSelection);
-                    }
-
-                    if (newSelection != null) {
-                        bindToProxy(newSelection);
-                    }
-                }
-        );
-    }
-
+    
     public PowerplantsPM getHydroProxy() {
         return hydroProxy;
     }
@@ -143,7 +134,7 @@ public class RootPM {
                 .orElse(null);
     }
 
-    public ObservableList<PowerplantsPM> allPowerplants() {
+    public ObservableList<PowerplantsPM> getAllPowerplants() {
         return allPowerplants;
     }
 
