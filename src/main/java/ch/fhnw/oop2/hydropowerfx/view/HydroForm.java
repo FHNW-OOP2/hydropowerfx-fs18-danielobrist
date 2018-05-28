@@ -33,6 +33,29 @@ public class HydroForm extends GridPane implements ViewMixin {
     private TextField nameField;
     private Label maxPowerLabel;
     private TextField maxPowerField;
+    private Label standortLabel;
+    private TextField standortField;
+    private Label cantonLabel;
+    private TextField cantonField;
+    private Label siteLabel;
+    private TextField siteField;
+    private Label maxWaterLabel;
+    private TextField maxWaterField;
+    private Label startFirstLabel;
+    private TextField startFirstField;
+    private Label startLastLabel;
+    private TextField startLastField;
+    private Label longitudeLabel;
+    private TextField longitudeField;
+    private Label latitudeLabel;
+    private TextField latitudeField;
+    private Label statusLabel;
+    private TextField statusField;
+    private Label waterbodiesLabel;
+    private TextField waterbodiesField;
+    private Label ImageLabel;
+    
+
 
     public HydroForm(RootPM root){
         this.root = root;

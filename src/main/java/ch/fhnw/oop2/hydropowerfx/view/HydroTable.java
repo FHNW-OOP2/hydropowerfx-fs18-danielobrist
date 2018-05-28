@@ -40,7 +40,7 @@ public class HydroTable extends VBox implements ViewMixin {
         nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
 
         TableColumn<PowerplantsPM, Number> idCol = new TableColumn<>("ID"); //ACHTUNG: Integer geht nicht, man muss Number nehmen als Typparameter!
-        idCol.setCellValueFactory(cell ->  cell.getValue().powerplantIDProperty());
+        idCol.setCellValueFactory(cell -> cell.getValue().powerplantIDProperty());
 
         TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Max Power");
         maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());
@@ -73,16 +73,16 @@ public class HydroTable extends VBox implements ViewMixin {
                 System.out.println(root.getHydroProxy().getName());
                 root.setSelectedPowerplantId(newValue.getPowerplantID());
                 System.out.println(root.getHydroProxy().getName());
-         }
+            }
         });
 
-       // tabelle.setOnMouseClicked(event -> {
+        // tabelle.setOnMouseClicked(event -> {
         //    TableView source = (TableView) event.getSource();
 
         //    PowerplantsPM wasserwerk = (PowerplantsPM) source.getSelectionModel().getSelectedItem();
         //    root.setSelectedPowerplantId(wasserwerk.getPowerplantID());
-          //  System.out.print(root.getHydroProxy().getPowerplantID());
-       // });
+        //  System.out.print(root.getHydroProxy().getPowerplantID());
+        // });
     }
 
 
