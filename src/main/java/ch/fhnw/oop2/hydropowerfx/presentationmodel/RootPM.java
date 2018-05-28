@@ -18,6 +18,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SplitPane;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
@@ -29,6 +30,7 @@ public class RootPM {
     private final ObservableList<PowerplantsPM> allPowerplants = FXCollections.observableArrayList();
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
+
 
 
     public RootPM() {
@@ -90,7 +92,7 @@ public class RootPM {
             throw new IllegalArgumentException(e);
         }
     }
-    
+
     public PowerplantsPM getHydroProxy() {
         return hydroProxy;
     }
