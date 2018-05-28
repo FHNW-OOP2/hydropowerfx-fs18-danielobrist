@@ -107,12 +107,32 @@ public class RootPM {
         hydroProxy.powerplantIDProperty()  .bindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().bindBidirectional(powerplant.nameProperty());
         hydroProxy.powerplantMaxPowerProperty().bindBidirectional(powerplant.powerplantMaxPowerProperty());
+        hydroProxy.powerplantCantonProperty().bindBidirectional(powerplant.powerplantCantonProperty());
+        hydroProxy.powerplantMaxVolumeProperty().bindBidirectional(powerplant.powerplantMaxVolumeProperty());
+        hydroProxy.powerplantSiteProperty().bindBidirectional(powerplant.powerplantSiteProperty());
+        hydroProxy.powerplantStatusProperty().bindBidirectional(powerplant.powerplantStatusProperty());
+        hydroProxy.powerplantStartFirstProperty().bindBidirectional(powerplant.powerplantStartFirstProperty());
+        hydroProxy.powerplantStartLastProperty().bindBidirectional(powerplant.powerplantStartLastProperty());
+        hydroProxy.powerplantLatitudeProperty().bindBidirectional(powerplant.powerplantLatitudeProperty());
+        hydroProxy.powerplantLongitudeProperty().bindBidirectional(powerplant.powerplantLongitudeProperty());
+        hydroProxy.powerplantWaterbodiesProperty().bindBidirectional(powerplant.powerplantWaterbodiesProperty());
+        hydroProxy.powerplantImageURLProperty().bindBidirectional(powerplant.powerplantImageURLProperty());
     }
 
     private void unbindFromProxy(PowerplantsPM powerplant) {
         hydroProxy.powerplantIDProperty()  .unbindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().unbindBidirectional(powerplant.nameProperty());
         hydroProxy.powerplantMaxPowerProperty().unbindBidirectional(powerplant.powerplantMaxPowerProperty());
+        hydroProxy.powerplantCantonProperty().unbindBidirectional(powerplant.powerplantCantonProperty());
+        hydroProxy.powerplantMaxVolumeProperty().unbindBidirectional(powerplant.powerplantMaxVolumeProperty());
+        hydroProxy.powerplantSiteProperty().unbindBidirectional(powerplant.powerplantSiteProperty());
+        hydroProxy.powerplantStatusProperty().unbindBidirectional(powerplant.powerplantStatusProperty());
+        hydroProxy.powerplantStartFirstProperty().unbindBidirectional(powerplant.powerplantStartFirstProperty());
+        hydroProxy.powerplantStartLastProperty().unbindBidirectional(powerplant.powerplantStartLastProperty());
+        hydroProxy.powerplantLatitudeProperty().unbindBidirectional(powerplant.powerplantLatitudeProperty());
+        hydroProxy.powerplantLongitudeProperty().unbindBidirectional(powerplant.powerplantLongitudeProperty());
+        hydroProxy.powerplantWaterbodiesProperty().unbindBidirectional(powerplant.powerplantWaterbodiesProperty());
+        hydroProxy.powerplantImageURLProperty().unbindBidirectional(powerplant.powerplantImageURLProperty());
     }
 
     public PowerplantsPM getPowerplant(int id) {

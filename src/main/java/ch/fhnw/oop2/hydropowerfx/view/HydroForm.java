@@ -18,8 +18,12 @@ public class HydroForm extends GridPane implements ViewMixin {
 
     private final RootPM root;
 
+    private Label idIndex;
+    private Label nameIndex;
+    private Label maxPowerIndex;
+
+
     private Label idLabel;
-    private Label     idField;
     private Label     nameLabel;
     private TextField nameField;
     private Label maxPowerLabel;
@@ -38,13 +42,15 @@ public class HydroForm extends GridPane implements ViewMixin {
     @Override
     public void initializeControls() {
         idLabel = new Label("Id");
-        idField = new Label();
+        idIndex = new Label();
 
         nameLabel = new Label("Name");
         nameField = new TextField();
+        nameIndex = new Label();
 
         maxPowerLabel = new Label("Max Power"); //unicode character für hochgestellte Zahlen
         maxPowerField = new TextField();
+        maxPowerIndex = new Label();
     }
 
     @Override
@@ -53,15 +59,21 @@ public class HydroForm extends GridPane implements ViewMixin {
         grow.setHgrow(Priority.ALWAYS);
         getColumnConstraints().addAll(new ColumnConstraints(), grow);
 
-        addRow(0, idLabel  , idField);
-        addRow(1, nameLabel, nameField);
-        addRow(2, maxPowerLabel, maxPowerField);
+        addRow(0, nameIndex);
+
+
+        addRow(4, idLabel  , idIndex);
+        addRow(5, nameLabel, nameField);
+        addRow(6, maxPowerLabel, maxPowerField);
     }
     @Override
     public void setupBindings() {
         PowerplantsPM proxy = root.getHydroProxy();
 
-        idField.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
+        idIndex.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
+        nameIndex.textProperty().bind(proxy.powerplantNameProperty());
+
+
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());
         maxPowerField.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
     }

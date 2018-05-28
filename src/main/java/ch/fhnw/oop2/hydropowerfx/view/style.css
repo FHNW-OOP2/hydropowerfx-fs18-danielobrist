@@ -19,3 +19,9 @@
     -fx-alignment       : center;
     -fx-background-color: linear-gradient(#e8bfc6 0%, #e8adb0 25%, #e894a1 100%);
 }
+.cantons {
+    -fx-font-size       : 30;
+    -fx-background-color: linear-gradient(#c3e8cd 0%, #b4e4be 25%, #86d88b 100%);
+    -fx-padding         : 40 20 30 20;
+    -fx-spacing         : 20;
+}
