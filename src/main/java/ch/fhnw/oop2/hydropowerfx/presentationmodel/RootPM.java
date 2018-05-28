@@ -22,12 +22,15 @@ import javafx.scene.control.SplitPane;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
+    private static final String FILE_NAME_CANTONS = "/data/cantons.csv";
     private static final String DELIMITER = ";";
 
     private final StringProperty applicationTitle = new SimpleStringProperty("HydroPowerFX");
     private final IntegerProperty selectedPowerplantId = new SimpleIntegerProperty(-1);
 
     private final ObservableList<PowerplantsPM> allPowerplants = FXCollections.observableArrayList();
+    private final ObservableList<CantonPM> allCantons = FXCollections.observableArrayList();
+
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
 
@@ -35,6 +38,8 @@ public class RootPM {
 
     public RootPM() {
         allPowerplants.addAll(readFromFile());
+        allCantons.addAll(readFromCantonFile());
+
         selectedPowerplantIdProperty().addListener((observable, oldValue, newValue) -> {
                     PowerplantsPM oldSelection = getPowerplant(oldValue.intValue());
                     PowerplantsPM newSelection = getPowerplant(newValue.intValue());
@@ -57,8 +62,16 @@ public class RootPM {
                     .collect(Collectors.toList());                        // alles aufsammeln
         }
     }
+    private List<CantonPM> readFromCantonFile() {
+        try (Stream<String> stream = getStreamOfLines(FILE_NAME_CANTONS)) {
+            return stream.skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
+                    .map(line -> new CantonPM(line.split(DELIMITER, 12), hydropowersPerCanton(line.split(DELIMITER)[1]), 4.4)) // aus jeder Zeile ein Objekt machen
+                    .collect(Collectors.toList());                        // alles aufsammeln
+        }
+    }
+
 //  ENTITY_ID;NAME;TYPE;SITE;CANTON;MAX_WATER_VOLUME_M3_S;MAX_POWER_MW;START_OF_OPERATION_FIRST;START_OF_OPERATION_LAST;LATITUDE;LONGITUDE;STATUS;WATERBODIES;IMAGE_URL
-    public void save() {
+    public void save() { //t ersetzen!!
         try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))) {
             writer.write("ID\tNAME\tTYPE\tSITE\tCANTON\tMAX_WATER_VOLUME_M3_S\tMAX_POWER_MW\tSTART_OF_OPERATION_FIRST\tSTART_OF_OPERATION_LAST\tLATITUDE\tLONGITUDE\tSTATUS\tWATERBODIES\tIMAGE_URL");
             writer.newLine();
@@ -139,6 +152,9 @@ public class RootPM {
     public ObservableList<PowerplantsPM> getAllPowerplants() {
         return allPowerplants;
     }
+    public ObservableList<CantonPM> getAllCantons() {
+        return allCantons;
+    }
 
     public String getApplicationTitle() {
         return applicationTitle.get();
@@ -163,5 +179,14 @@ public class RootPM {
     public void setSelectedPowerplantId(int selectedPowerplantId) {
         this.selectedPowerplantId.set(selectedPowerplantId);
     }
+
+    //kraftwerke pro kanton zählen
+    public int hydropowersPerCanton(String cantonShort){
+        return (int) allPowerplants.stream()
+                .filter(hydropower -> hydropower.getPowerplantCanton().equals(cantonShort))
+                .count();
+    }
+
+
 
 }

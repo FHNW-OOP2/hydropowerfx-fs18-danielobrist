@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.util.converter.NumberStringConverter;
 
 
@@ -53,9 +54,8 @@ public class HydroForm extends GridPane implements ViewMixin {
     private TextField statusField;
     private Label waterbodiesLabel;
     private TextField waterbodiesField;
-    private Label ImageLabel;
-    
-
+    private Label imageLabel;
+    private TextField imageField;
 
     public HydroForm(RootPM root){
         this.root = root;
@@ -69,37 +69,69 @@ public class HydroForm extends GridPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        idLabel = new Label("Id");
         idIndex = new Label();
+        nameIndex = new Label();
+        maxPowerIndex = new Label();
+        siteIndex = new Label();
+        operationstartFirstIndex = new Label();
+
+        idLabel = new Label("Id");
 
         nameLabel = new Label("Name");
         nameField = new TextField();
-        nameIndex = new Label();
+
+        standortLabel = new Label("Standort");
+        standortField = new TextField();
+
+        cantonLabel = new Label("Kanton");
+        cantonField = new TextField();
+
+        siteLabel = new Label("Site");
+        siteField = new TextField();
 
         maxPowerLabel = new Label("Max Power"); //unicode character für hochgestellte Zahlen
         maxPowerField = new TextField();
-        maxPowerIndex = new Label();
 
-        siteIndex = new Label();
+        maxWaterLabel = new Label("Max Water");
+        maxWaterField = new TextField();
 
-        operationstartFirstIndex = new Label();
+        startFirstLabel = new Label("Inbetriebnahme");
+        startFirstField = new TextField();
+
+        startLastLabel = new Label("Letzte Inbetriebnahme");
+        startLastField = new TextField();
+
+        longitudeLabel = new Label("Longitude");
+        longitudeField = new TextField();
+
+        latitudeLabel = new Label("Latitude");
+        latitudeField = new TextField();
+
+        statusLabel = new Label("Status");
+        statusField = new TextField();
+
+        waterbodiesLabel = new Label("Waterbodies");
+        waterbodiesField = new TextField();
+
+        imageLabel = new Label("Bild-URL");
+        imageField = new TextField();
     }
 
     @Override
     public void layoutControls() {
-        ColumnConstraints grow = new ColumnConstraints();
-        grow.setHgrow(Priority.ALWAYS);
-        getColumnConstraints().addAll(new ColumnConstraints(), grow);
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setHgrow(Priority.ALWAYS);
+        getColumnConstraints().addAll(cc, cc, cc, cc, cc, cc, cc, cc);
 
-        addRow(0, nameIndex);
-        addRow(1, siteIndex);
-        addRow(3, maxPowerIndex);
-        addRow(4, operationstartFirstIndex);
+        RowConstraints gc = new RowConstraints();
+        gc.setVgrow(Priority.ALWAYS);
+        getRowConstraints().addAll(gc, gc, gc, gc, gc, gc, gc, gc);
 
+        add(nameIndex, 0, 0);
+        add(siteIndex, 0, 1);
 
-        addRow(6, idLabel  , idIndex);
-        addRow(7, nameLabel, nameField);
-        addRow(8, maxPowerLabel, maxPowerField);
+        add(nameLabel, 0,5);
+        add(nameField, 0, 6);
     }
     @Override
     public void setupBindings() {
@@ -107,6 +139,7 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         idIndex.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
         nameIndex.textProperty().bind(proxy.powerplantNameProperty());
+        maxPowerIndex.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
 
 
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());

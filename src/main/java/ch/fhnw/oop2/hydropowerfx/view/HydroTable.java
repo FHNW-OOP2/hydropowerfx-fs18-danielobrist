@@ -70,9 +70,7 @@ public class HydroTable extends VBox implements ViewMixin {
     public void setupValueChangedListeners() {
         tabelle.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
-                System.out.println(root.getHydroProxy().getName());
                 root.setSelectedPowerplantId(newValue.getPowerplantID());
-                System.out.println(root.getHydroProxy().getName());
             }
         });
 
