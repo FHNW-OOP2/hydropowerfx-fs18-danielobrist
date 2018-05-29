@@ -21,7 +21,7 @@ public class CantonTable extends VBox implements ViewMixin {
 
     @Override
     public void initializeSelf() {
-        getStyleClass().add("cantons");
+        getStyleClass().add("table");
     }
 
     @Override

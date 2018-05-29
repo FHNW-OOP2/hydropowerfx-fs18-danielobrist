@@ -110,6 +110,7 @@ public class RootPM {
     private void bindToProxy(PowerplantsPM powerplant) {
         hydroProxy.powerplantIDProperty()  .bindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().bindBidirectional(powerplant.nameProperty());
+        hydroProxy.powerplantTypeProperty().bindBidirectional(powerplant.powerplantTypeProperty());
         hydroProxy.powerplantMaxPowerProperty().bindBidirectional(powerplant.powerplantMaxPowerProperty());
         hydroProxy.powerplantCantonProperty().bindBidirectional(powerplant.powerplantCantonProperty());
         hydroProxy.powerplantMaxVolumeProperty().bindBidirectional(powerplant.powerplantMaxVolumeProperty());
@@ -126,6 +127,7 @@ public class RootPM {
     private void unbindFromProxy(PowerplantsPM powerplant) {
         hydroProxy.powerplantIDProperty()  .unbindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().unbindBidirectional(powerplant.nameProperty());
+        hydroProxy.powerplantTypeProperty().unbindBidirectional(powerplant.powerplantTypeProperty());
         hydroProxy.powerplantMaxPowerProperty().unbindBidirectional(powerplant.powerplantMaxPowerProperty());
         hydroProxy.powerplantCantonProperty().unbindBidirectional(powerplant.powerplantCantonProperty());
         hydroProxy.powerplantMaxVolumeProperty().unbindBidirectional(powerplant.powerplantMaxVolumeProperty());

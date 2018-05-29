@@ -27,11 +27,14 @@ public class HydroForm extends GridPane implements ViewMixin {
     private Label maxPowerIndex;
     private Label siteIndex;
     private Label operationstartFirstIndex;
+    private Label cantonIndex;
 
 
     private Label idLabel;
     private Label     nameLabel;
     private TextField nameField;
+    private Label typeLabel;
+    private TextField typeField;
     private Label maxPowerLabel;
     private TextField maxPowerField;
     private Label standortLabel;
@@ -74,20 +77,21 @@ public class HydroForm extends GridPane implements ViewMixin {
         maxPowerIndex = new Label();
         siteIndex = new Label();
         operationstartFirstIndex = new Label();
+        cantonIndex = new Label();
 
         idLabel = new Label("Id");
 
         nameLabel = new Label("Name");
         nameField = new TextField();
 
-        standortLabel = new Label("Standort");
-        standortField = new TextField();
+        typeLabel = new Label("Type");
+        typeField = new TextField();
+
+        siteLabel = new Label("Standort");
+        siteField = new TextField();
 
         cantonLabel = new Label("Kanton");
         cantonField = new TextField();
-
-        siteLabel = new Label("Site");
-        siteField = new TextField();
 
         maxPowerLabel = new Label("Max Power"); //unicode character für hochgestellte Zahlen
         maxPowerField = new TextField();
@@ -129,9 +133,17 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         add(nameIndex, 0, 0);
         add(siteIndex, 0, 1);
+        add(cantonIndex, 1, 1);
 
-        add(nameLabel, 0,5);
-        add(nameField, 0, 6);
+        add(nameLabel, 0,3);
+        add(nameField, 0, 4);
+        add(cantonLabel, 1, 3);
+        add(cantonField, 1, 4);
+        add(typeLabel, 0, 5);
+        add(typeField, 0, 6);
+        add(siteLabel, 1, 5);
+        add(siteField, 1, 6);
+
     }
     @Override
     public void setupBindings() {
@@ -140,10 +152,15 @@ public class HydroForm extends GridPane implements ViewMixin {
         idIndex.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
         nameIndex.textProperty().bind(proxy.powerplantNameProperty());
         maxPowerIndex.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
-
+        siteIndex.textProperty().bind(proxy.powerplantSiteProperty());
+        cantonIndex.textProperty().bind(proxy.powerplantCantonProperty());
 
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());
+        cantonField.textProperty().bindBidirectional(proxy.powerplantCantonProperty());
+        typeField.textProperty().bindBidirectional(proxy.powerplantTypeProperty());
+        siteField.textProperty().bindBidirectional(proxy.powerplantSiteProperty());
         maxPowerField.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
+
     }
 
 
