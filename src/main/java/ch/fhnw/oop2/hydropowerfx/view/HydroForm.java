@@ -152,7 +152,16 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(startFirstField, 0, 10);
         add(startLastLabel, 1, 9);
         add(startLastField, 1, 10);
-
+        add(latitudeLabel, 0,11);
+        add(latitudeField, 0, 12);
+        add(longitudeLabel, 1, 11);
+        add(longitudeField, 1, 12);
+        add(statusLabel, 0, 13);
+        add(statusField, 0, 14);
+        add(waterbodiesLabel, 0, 15);
+        add(waterbodiesField, 0, 16);
+        add(imageLabel, 0, 17);
+        add(imageField, 0, 18);
     }
     @Override
     public void setupBindings() {
@@ -172,6 +181,11 @@ public class HydroForm extends GridPane implements ViewMixin {
         maxPowerField.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
         startFirstField.textProperty().bindBidirectional(proxy.powerplantStartFirstProperty(), new NumberStringConverter(new Locale("de", "CH")));
         startLastField.textProperty().bindBidirectional(proxy.powerplantStartLastProperty(), new NumberStringConverter(new Locale("de", "CH")));
+        longitudeField.textProperty().bindBidirectional(proxy.powerplantLongitudeProperty(), new NumberStringConverter(new Locale("de", "CH")));
+        latitudeField.textProperty().bindBidirectional(proxy.powerplantLatitudeProperty(), new NumberStringConverter(new Locale("de", "CH")));
+        statusField.textProperty().bindBidirectional(proxy.powerplantStatusProperty());
+        waterbodiesField.textProperty().bindBidirectional(proxy.powerplantWaterbodiesProperty());
+        imageField.textProperty().bindBidirectional(proxy.powerplantImageURLProperty());
     }
 
 

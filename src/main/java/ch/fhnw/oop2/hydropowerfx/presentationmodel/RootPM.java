@@ -25,7 +25,6 @@ public class RootPM {
 
     private final StringProperty applicationTitle = new SimpleStringProperty("HydroPowerFX");
     private final IntegerProperty selectedPowerplantId = new SimpleIntegerProperty(-1);
-    private final IntegerProperty hydropowersPerCanton = new SimpleIntegerProperty();
 
     private final ObservableList<PowerplantsPM> allPowerplants = FXCollections.observableArrayList();
     private final ObservableList<CantonPM> allCantons = FXCollections.observableArrayList();
@@ -62,8 +61,8 @@ public class RootPM {
     }
     private List<CantonPM> readFromCantonFile() {
         try (Stream<String> stream = getStreamOfLines(FILE_NAME_CANTONS)) {
-            return stream.skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
-                    .map(line -> new CantonPM(line.split(DELIMITER, 12), hydropowersPerCanton(line.split(DELIMITER)[1]), powerPerCanton(line.split(DELIMITER)[1]))) // aus jeder Zeile ein Objekt machen
+            return stream.skip(1)
+                    .map(line -> new CantonPM(line.split(DELIMITER, 12), hydropowersPerCanton(line.split(DELIMITER)[1]), powerPerCanton(line.split(DELIMITER)[1])))
                     .collect(Collectors.toList());                        // alles aufsammeln
         }
     }
@@ -183,16 +182,15 @@ public class RootPM {
     //kraftwerke pro kanton zählen
     public int hydropowersPerCanton(String cantonShort){
         return (int) allPowerplants.stream()
-                .filter(hydropower -> hydropower.getPowerplantCanton().equals(cantonShort))
+                .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
                 .count();
     }
 
-
+    //alle maxpower pro kanton summieren
     public double powerPerCanton(String cantonShort){
         return allPowerplants.stream()
                 .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
                 .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
-                //hier stream, der alle power collected.!
     }
 
 }

@@ -9,14 +9,13 @@ public class CantonPM {
     public IntegerProperty hydropowersPerCanton = new SimpleIntegerProperty();
     public DoubleProperty powerPerCanton = new SimpleDoubleProperty();
 
-    //alle anderen attribute adden
+    //alle anderen attribute nicht benötigt im moment
 
     public CantonPM(String[] line, int totalPowerplantsPerCanton, double totalPowerPerCanton){
         setCantonName(line[0]);
         setCantonShort(line[1]);
         setHydropowersPerCanton(totalPowerplantsPerCanton);
         setPowerPerCanton(totalPowerPerCanton);
-        //andere setter
     }
 
     //getter and setter
