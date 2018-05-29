@@ -9,7 +9,7 @@ import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 public class RootPanel extends BorderPane implements ViewMixin {
     private final RootPM model;
 
-    private CantonOverview cantons;
+    private CantonTable cantons;
     private HydroForm form;
     private HydroTable table;
     private Navbar navbar;
@@ -29,7 +29,7 @@ public class RootPanel extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        cantons = new CantonOverview(model);
+        cantons = new CantonTable(model);
         form = new HydroForm(model);
         table = new HydroTable(model);
         navbar = new Navbar(model);

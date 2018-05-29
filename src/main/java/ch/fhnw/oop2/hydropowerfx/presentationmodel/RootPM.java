@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +17,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.SplitPane;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
@@ -30,7 +28,6 @@ public class RootPM {
 
     private final ObservableList<PowerplantsPM> allPowerplants = FXCollections.observableArrayList();
     private final ObservableList<CantonPM> allCantons = FXCollections.observableArrayList();
-
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
 
@@ -65,7 +62,7 @@ public class RootPM {
     private List<CantonPM> readFromCantonFile() {
         try (Stream<String> stream = getStreamOfLines(FILE_NAME_CANTONS)) {
             return stream.skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
-                    .map(line -> new CantonPM(line.split(DELIMITER, 12), hydropowersPerCanton(line.split(DELIMITER)[1]), 4.4)) // aus jeder Zeile ein Objekt machen
+                    .map(line -> new CantonPM(line.split(DELIMITER, 12), hydropowersPerCanton(line.split(DELIMITER)[1]), powerPerCanton(line.split(DELIMITER)[1]))) // aus jeder Zeile ein Objekt machen
                     .collect(Collectors.toList());                        // alles aufsammeln
         }
     }
@@ -188,5 +185,11 @@ public class RootPM {
     }
 
 
+    public double powerPerCanton(String cantonShort){
+        return allPowerplants.stream()
+                .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
+                .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
+                //hier stream, der alle power collected.!
+    }
 
 }
