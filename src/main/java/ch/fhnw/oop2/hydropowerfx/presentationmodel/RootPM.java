@@ -25,6 +25,7 @@ public class RootPM {
 
     private final StringProperty applicationTitle = new SimpleStringProperty("HydroPowerFX");
     private final IntegerProperty selectedPowerplantId = new SimpleIntegerProperty(-1);
+    private final IntegerProperty hydropowersPerCanton = new SimpleIntegerProperty();
 
     private final ObservableList<PowerplantsPM> allPowerplants = FXCollections.observableArrayList();
     private final ObservableList<CantonPM> allCantons = FXCollections.observableArrayList();

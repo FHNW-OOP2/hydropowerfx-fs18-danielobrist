@@ -1,21 +1,50 @@
 package ch.fhnw.oop2.hydropowerfx.presentationmodel;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 //Kanton;Kürzel;Kantonsnummer;Standesstimme;Beitritt;Hauptort;Einwohner;Ausländer;Fläche;Einwohnerdichte;Gemeinden;Amtssprache
 public class CantonPM {
     private final StringProperty cantonName = new SimpleStringProperty();
     private final StringProperty cantonShort = new SimpleStringProperty();
+    public IntegerProperty hydropowersPerCanton = new SimpleIntegerProperty();
+    public DoubleProperty powerPerCanton = new SimpleDoubleProperty();
+
     //alle anderen attribute adden
 
     public CantonPM(String[] line, int totalPowerplantsPerCanton, double totalPowerPerCanton){
         setCantonName(line[0]);
         setCantonShort(line[1]);
+        setHydropowersPerCanton(totalPowerplantsPerCanton);
+        setPowerPerCanton(totalPowerPerCanton);
         //andere setter
     }
 
     //getter and setter
+
+
+    public double getPowerPerCanton() {
+        return powerPerCanton.get();
+    }
+
+    public DoubleProperty powerPerCantonProperty() {
+        return powerPerCanton;
+    }
+
+    public void setPowerPerCanton(double powerPerCanton) {
+        this.powerPerCanton.set(powerPerCanton);
+    }
+
+    public int getHydropowersPerCanton() {
+        return hydropowersPerCanton.get();
+    }
+
+    public IntegerProperty hydropowersPerCantonProperty() {
+        return hydropowersPerCanton;
+    }
+
+    public void setHydropowersPerCanton(int hydropowersPerCanton) {
+        this.hydropowersPerCanton.set(hydropowersPerCanton);
+    }
 
     public String getCantonName() {
         return cantonName.get();

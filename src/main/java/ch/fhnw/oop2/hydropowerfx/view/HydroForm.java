@@ -134,6 +134,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(nameIndex, 0, 0);
         add(siteIndex, 0, 1);
         add(cantonIndex, 1, 1);
+        add(maxPowerIndex, 0, 2);
 
         add(nameLabel, 0,3);
         add(nameField, 0, 4);
@@ -143,6 +144,14 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(typeField, 0, 6);
         add(siteLabel, 1, 5);
         add(siteField, 1, 6);
+        add(maxWaterLabel, 0, 7);
+        add(maxWaterField, 0, 8);
+        add(maxPowerLabel, 1, 7);
+        add(maxPowerField, 1, 8);
+        add(startFirstLabel, 0, 9);
+        add(startFirstField, 0, 10);
+        add(startLastLabel, 1, 9);
+        add(startLastField, 1, 10);
 
     }
     @Override
@@ -159,8 +168,10 @@ public class HydroForm extends GridPane implements ViewMixin {
         cantonField.textProperty().bindBidirectional(proxy.powerplantCantonProperty());
         typeField.textProperty().bindBidirectional(proxy.powerplantTypeProperty());
         siteField.textProperty().bindBidirectional(proxy.powerplantSiteProperty());
+        maxWaterField.textProperty().bindBidirectional(proxy.powerplantMaxVolumeProperty(), new NumberStringConverter(new Locale("de", "CH")));
         maxPowerField.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
-
+        startFirstField.textProperty().bindBidirectional(proxy.powerplantStartFirstProperty(), new NumberStringConverter(new Locale("de", "CH")));
+        startLastField.textProperty().bindBidirectional(proxy.powerplantStartLastProperty(), new NumberStringConverter(new Locale("de", "CH")));
     }
 
 
