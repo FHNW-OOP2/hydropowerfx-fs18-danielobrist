@@ -12,6 +12,7 @@ public class HydroHeader extends HBox implements ViewMixin {
 
     private Button addButton;
     private Button deleteButton;
+    private Button saveButton;
 
     public HydroHeader(RootPM root) {
         this.root = root;
@@ -27,12 +28,19 @@ public class HydroHeader extends HBox implements ViewMixin {
     public void initializeControls() {
         addButton = new Button("Add");
         deleteButton = new Button("Delete");
+        saveButton = new Button("Save");
     }
 
     @Override
     public void layoutControls() {
 
-        getChildren().addAll(addButton, deleteButton);
+        getChildren().addAll(addButton, deleteButton, saveButton);
+    }
+    @Override
+    public void setupEventHandlers() {
+        // addButton.setOnAction(event -> root.addNewPowerplant());
+
+        saveButton.setOnAction(event -> root.save());
     }
 
     @Override

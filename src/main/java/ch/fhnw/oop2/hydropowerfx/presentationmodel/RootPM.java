@@ -67,10 +67,9 @@ public class RootPM {
         }
     }
 
-//  ENTITY_ID;NAME;TYPE;SITE;CANTON;MAX_WATER_VOLUME_M3_S;MAX_POWER_MW;START_OF_OPERATION_FIRST;START_OF_OPERATION_LAST;LATITUDE;LONGITUDE;STATUS;WATERBODIES;IMAGE_URL
-    public void save() { //t ersetzen!!
+    public void save() {
         try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME))) {
-            writer.write("ID\tNAME\tTYPE\tSITE\tCANTON\tMAX_WATER_VOLUME_M3_S\tMAX_POWER_MW\tSTART_OF_OPERATION_FIRST\tSTART_OF_OPERATION_LAST\tLATITUDE\tLONGITUDE\tSTATUS\tWATERBODIES\tIMAGE_URL");
+            writer.write("ENTITY_ID;NAME;TYPE;SITE;CANTON;MAX_WATER_VOLUME_M3_S;MAX_POWER_MW;START_OF_OPERATION_FIRST;START_OF_OPERATION_LAST;LATITUDE;LONGITUDE;STATUS;WATERBODIES;IMAGE_URL");
             writer.newLine();
             allPowerplants.stream()
                     .map(powerplant -> powerplant.infoAsLine(DELIMITER))

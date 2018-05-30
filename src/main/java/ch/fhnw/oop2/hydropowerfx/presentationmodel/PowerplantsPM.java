@@ -1,11 +1,14 @@
 package ch.fhnw.oop2.hydropowerfx.presentationmodel;
 
+import ch.fhnw.oop2.hydropowerfx.view.HydroTable;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 //  ENTITY_ID;NAME;TYPE;SITE;CANTON;MAX_WATER_VOLUME_M3_S;MAX_POWER_MW;START_OF_OPERATION_FIRST;START_OF_OPERATION_LAST;LATITUDE;LONGITUDE;STATUS;WATERBODIES;IMAGE_URL
@@ -25,6 +28,8 @@ public class PowerplantsPM {
     private final StringProperty powerplantStatus = new SimpleStringProperty();
     private final StringProperty powerplantWaterbodies = new SimpleStringProperty();
     private final StringProperty powerplantImageURL = new SimpleStringProperty();
+
+    private final ObservableList<String> allPowerplants = FXCollections.observableArrayList();
 
     public PowerplantsPM() {
     }

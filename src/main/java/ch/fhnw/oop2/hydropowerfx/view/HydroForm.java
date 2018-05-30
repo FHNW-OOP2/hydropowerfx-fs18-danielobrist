@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
+import java.util.List;
 import java.util.Locale;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
@@ -187,6 +188,5 @@ public class HydroForm extends GridPane implements ViewMixin {
         waterbodiesField.textProperty().bindBidirectional(proxy.powerplantWaterbodiesProperty());
         imageField.textProperty().bindBidirectional(proxy.powerplantImageURLProperty());
     }
-
 
 }
