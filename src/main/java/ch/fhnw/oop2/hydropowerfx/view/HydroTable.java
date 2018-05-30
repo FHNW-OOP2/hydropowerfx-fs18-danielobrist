@@ -108,22 +108,13 @@ public class HydroTable extends VBox implements ViewMixin {
                 root.setSelectedPowerplantId(newValue.getPowerplantID());
             }
         });
-        //add
+        //add scroll down
         root.getAllPowerplants().addListener((ListChangeListener<PowerplantsPM>) c -> {
             while (c.next()) {
                 tabelle.scrollTo(c.getFrom());
             }
         });
 
-
-
-        // tabelle.setOnMouseClicked(event -> {
-        //    TableView source = (TableView) event.getSource();
-
-        //    PowerplantsPM wasserwerk = (PowerplantsPM) source.getSelectionModel().getSelectedItem();
-        //    root.setSelectedPowerplantId(wasserwerk.getPowerplantID());
-        //  System.out.print(root.getHydroProxy().getPowerplantID());
-        // });
     }
 
 

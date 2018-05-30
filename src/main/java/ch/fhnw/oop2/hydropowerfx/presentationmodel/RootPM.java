@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 public class RootPM {
@@ -49,7 +49,7 @@ public class RootPM {
                     }
                 }
         );
-        //powerplant.bind(Bindings.createObjectBinding(() -> PowerplantsPM);
+
 
     }
 
@@ -211,5 +211,9 @@ public class RootPM {
                 .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
     }
 
-
+    //liste refreshen inkl. gezählter und summierter werte
+    public void refreshCantonsList() {
+        allCantons.removeAll();
+        allCantons.addAll(readFromCantonFile());
+    }
 }

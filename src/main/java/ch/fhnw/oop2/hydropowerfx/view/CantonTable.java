@@ -3,6 +3,7 @@ package ch.fhnw.oop2.hydropowerfx.view;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.CantonPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Priority;
@@ -56,6 +57,19 @@ public class CantonTable extends VBox implements ViewMixin {
     }
     @Override
     public void setupBindings() {
+    }
 
+    @Override
+    public void setupValueChangedListeners(){
+        //changelistener to observe powerplants list and refresh the cantonTable if powerplants observablelist change
+        root.getAllPowerplants().addListener(new ListChangeListener<PowerplantsPM>() {
+            public void onChanged(Change<? extends PowerplantsPM> c) {
+                while(c.next()){
+                    //do changes here
+                    root.refreshCantonsList();
+                    table.refresh();
+                }
+            }
+        });
     }
 }

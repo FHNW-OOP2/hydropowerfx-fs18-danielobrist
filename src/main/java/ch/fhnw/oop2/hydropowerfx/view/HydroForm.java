@@ -189,4 +189,6 @@ public class HydroForm extends GridPane implements ViewMixin {
         imageField.textProperty().bindBidirectional(proxy.powerplantImageURLProperty());
     }
 
+    
+
 }
