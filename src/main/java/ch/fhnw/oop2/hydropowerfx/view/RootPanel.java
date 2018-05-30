@@ -32,7 +32,7 @@ public class RootPanel extends BorderPane implements ViewMixin {
         cantons = new CantonTable(model);
         form = new HydroForm(model);
         table = new HydroTable(model);
-        navbar = new HydroHeader(model);
+        navbar = new HydroHeader(model, table);
 
     }
 

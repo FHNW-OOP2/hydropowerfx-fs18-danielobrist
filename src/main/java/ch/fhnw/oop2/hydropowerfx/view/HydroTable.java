@@ -2,9 +2,12 @@ package ch.fhnw.oop2.hydropowerfx.view;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -15,7 +18,6 @@ public class HydroTable extends VBox implements ViewMixin {
     private final RootPM root;
 
     private TableView<PowerplantsPM> tabelle;   //Tabellenansicht mit Kraftwerken auf jeder Zeile
-    private Label HYDROLABEL;
 
     public HydroTable(RootPM root) {
         this.root = root;
@@ -30,7 +32,7 @@ public class HydroTable extends VBox implements ViewMixin {
     @Override
     public void initializeControls() {
         tabelle = initializePowerplantTabelle();
-        HYDROLABEL = new Label();
+        tabelle.setEditable(true);
     }
 
     private TableView<PowerplantsPM> initializePowerplantTabelle() {
@@ -50,12 +52,37 @@ public class HydroTable extends VBox implements ViewMixin {
         return tableView;
     }
 
+    public void addRow() {
+        //get position
+        TablePosition pos = tabelle.getFocusModel().getFocusedCell();
+
+        //clear current selection
+        tabelle.getSelectionModel().clearSelection();
+
+        //create new empty powerplant and add it to model
+        PowerplantsPM powerplant = new PowerplantsPM();
+        tabelle.getItems().add(powerplant);
+
+        //get last row
+        int row = tabelle.getItems().size() - 1;
+        tabelle.getSelectionModel().select(row, pos.getTableColumn());
+
+        //scroll to new row
+        tabelle.scrollTo(powerplant);
+    }
+
+    public void deleteSelectedRows() {
+        tabelle.getItems().removeAll(tabelle.getSelectionModel().getSelectedItems());
+        //clears selection, because table selects by index
+        tabelle.getSelectionModel().clearSelection();
+    }
+
 
     @Override
     public void layoutControls() {
         setVgrow(tabelle, Priority.ALWAYS);
 
-        getChildren().addAll(tabelle, HYDROLABEL);
+        getChildren().addAll(tabelle);
 
     }
 
@@ -67,12 +94,28 @@ public class HydroTable extends VBox implements ViewMixin {
     }
 
     @Override
+    public void setupEventHandlers() {
+
+    }
+
+
+
+    @Override
     public void setupValueChangedListeners() {
+        //set selected PowerplantID
         tabelle.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
                 root.setSelectedPowerplantId(newValue.getPowerplantID());
             }
         });
+        //add
+        root.getAllPowerplants().addListener((ListChangeListener<PowerplantsPM>) c -> {
+            while (c.next()) {
+                tabelle.scrollTo(c.getFrom());
+            }
+        });
+
+
 
         // tabelle.setOnMouseClicked(event -> {
         //    TableView source = (TableView) event.getSource();

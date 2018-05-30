@@ -9,13 +9,15 @@ import javafx.scene.layout.HBox;
 public class HydroHeader extends HBox implements ViewMixin {
 
     private final RootPM root;
+    private final HydroTable table;
 
     private Button addButton;
     private Button deleteButton;
     private Button saveButton;
 
-    public HydroHeader(RootPM root) {
+    public HydroHeader(RootPM root, HydroTable table) {
         this.root = root;
+        this.table = table;
         init();
     }
 
@@ -38,9 +40,13 @@ public class HydroHeader extends HBox implements ViewMixin {
     }
     @Override
     public void setupEventHandlers() {
-        // addButton.setOnAction(event -> root.addNewPowerplant());
-
         saveButton.setOnAction(event -> root.save());
+
+        addButton.setOnAction(event -> table.addRow());
+        addButton.setFocusTraversable(false);
+
+        deleteButton.setOnAction(event -> table.deleteSelectedRows());
+        deleteButton.setFocusTraversable(false);
     }
 
     @Override

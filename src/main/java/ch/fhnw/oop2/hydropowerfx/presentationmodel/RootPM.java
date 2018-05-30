@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,6 +29,7 @@ public class RootPM {
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
 
+    private final ObjectProperty<PowerplantsPM> powerplant = new SimpleObjectProperty<>();
 
 
     public RootPM() {
@@ -50,6 +49,8 @@ public class RootPM {
                     }
                 }
         );
+        //powerplant.bind(Bindings.createObjectBinding(() -> PowerplantsPM);
+
     }
 
     private List<PowerplantsPM> readFromFile() {
@@ -85,6 +86,12 @@ public class RootPM {
             throw new IllegalStateException("save failed");
         }
     }
+
+    public void delete() {
+
+    }
+
+
 
     private Stream<String> getStreamOfLines(String fileName) {
         try {
@@ -178,6 +185,18 @@ public class RootPM {
         this.selectedPowerplantId.set(selectedPowerplantId);
     }
 
+    public PowerplantsPM getPowerplant() {
+        return powerplant.get();
+    }
+
+    public ObjectProperty<PowerplantsPM> powerplantProperty() {
+        return powerplant;
+    }
+
+    public void setPowerplant(PowerplantsPM powerplant) {
+        this.powerplant.set(powerplant);
+    }
+
     //kraftwerke pro kanton zählen
     public int hydropowersPerCanton(String cantonShort){
         return (int) allPowerplants.stream()
@@ -191,5 +210,6 @@ public class RootPM {
                 .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
                 .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
     }
+
 
 }
