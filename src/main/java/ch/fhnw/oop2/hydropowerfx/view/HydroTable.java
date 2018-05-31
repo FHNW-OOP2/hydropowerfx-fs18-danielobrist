@@ -3,12 +3,11 @@ package ch.fhnw.oop2.hydropowerfx.view;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import javafx.collections.ListChangeListener;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
+import javafx.util.converter.NumberStringConverter;
 
 public class HydroTable extends VBox implements ViewMixin {
 
@@ -34,14 +33,6 @@ public class HydroTable extends VBox implements ViewMixin {
     public void initializeControls() {
         tabelle = initializePowerplantTabelle();
         tabelle.setEditable(true);
-        Callback<TableColumn, TableCell> cellFactory = new Callback<TableColumn, TableCell>(){
-
-            @Override
-            public TableCell call(TableColumn p){
-                return new EditingCell();
-            }
-        };
-
     }
 
     private TableView<PowerplantsPM> initializePowerplantTabelle() {
@@ -49,23 +40,19 @@ public class HydroTable extends VBox implements ViewMixin {
 
         TableColumn<PowerplantsPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
         nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
-        /*nameCol.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<PowerplantsPM, String>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<PowerplantsPM, String> event) {
-                ((PowerplantsPM) event.getTableView().getItems().get(
-                        event.getTablePosition().getRow()
-                ).setName(event.getNewValue());
-            }
-        });*/
+        nameCol.setCellFactory(TextFieldTableCell.forTableColumn()); //makes cells editable (ENTER saves Value in Table)
 
-        TableColumn<PowerplantsPM, Number> idCol = new TableColumn<>("ID"); //ACHTUNG: Integer geht nicht, man muss Number nehmen als Typparameter!
-        idCol.setCellValueFactory(cell -> cell.getValue().powerplantIDProperty());
+        TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme"); //ACHTUNG: Number, Integer geht nicht, man muss Number nehmen als Typparameter!
+        startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
+        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 
-        TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Max Power");
+
+        TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Leistung (MW)");
         maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());
+        maxpowerCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 
-        tableView.getColumns().addAll(nameCol, idCol, maxpowerCol);
+
+        tableView.getColumns().addAll(nameCol, maxpowerCol, startCol);
 
         return tableView;
     }
