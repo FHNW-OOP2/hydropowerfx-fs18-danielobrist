@@ -12,7 +12,7 @@ public class RootPanel extends BorderPane implements ViewMixin {
     private CantonTable cantons;
     private HydroForm form;
     private HydroTable table;
-    private HydroHeader navbar;
+    private HydroHeader header;
     private final SplitPane splitpane;
 
     public RootPanel(RootPM model) {
@@ -31,15 +31,14 @@ public class RootPanel extends BorderPane implements ViewMixin {
     public void initializeControls() {
         cantons = new CantonTable(model);
         form = new HydroForm(model);
-        table = new HydroTable(model);
-        navbar = new HydroHeader(model, table);
-
+        table = new HydroTable(model, header);
+        header = new HydroHeader(model, table);
     }
 
     @Override
     public void layoutControls() {
 
-        setTop(navbar);
+        setTop(header);
         setCenter(splitpane);
         setBottom(cantons);
 

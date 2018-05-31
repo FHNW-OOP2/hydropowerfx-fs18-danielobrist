@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 public class RootPM {
@@ -28,8 +27,7 @@ public class RootPM {
     private final ObservableList<CantonPM> allCantons = FXCollections.observableArrayList();
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
-
-    private final ObjectProperty<PowerplantsPM> powerplant = new SimpleObjectProperty<>();
+    private final CantonPM cantonProxy = new CantonPM();
 
 
     public RootPM() {
@@ -87,12 +85,6 @@ public class RootPM {
         }
     }
 
-    public void delete() {
-
-    }
-
-
-
     private Stream<String> getStreamOfLines(String fileName) {
         try {
             return Files.lines(getPath(fileName), StandardCharsets.UTF_8);
@@ -145,8 +137,21 @@ public class RootPM {
         hydroProxy.powerplantLongitudeProperty().unbindBidirectional(powerplant.powerplantLongitudeProperty());
         hydroProxy.powerplantWaterbodiesProperty().unbindBidirectional(powerplant.powerplantWaterbodiesProperty());
         hydroProxy.powerplantImageURLProperty().unbindBidirectional(powerplant.powerplantImageURLProperty());
+
     }
 
+    public CantonPM getCantonProxy() {
+        return cantonProxy;
+    }
+
+    private void bindToCantonProxy(CantonPM canton) {
+        hydroProxy.powerplantMaxPowerProperty().bindBidirectional(canton.hydropowersPerCantonProperty());
+
+    }
+    private void unbindFromCantonProxy(CantonPM canton) {
+        hydroProxy.powerplantMaxPowerProperty().bindBidirectional(canton.hydropowersPerCantonProperty());
+
+    }
     public PowerplantsPM getPowerplant(int id) {
         return allPowerplants.stream()
                 .filter(powerplantsPM -> powerplantsPM.getPowerplantID() == id)
@@ -185,17 +190,6 @@ public class RootPM {
         this.selectedPowerplantId.set(selectedPowerplantId);
     }
 
-    public PowerplantsPM getPowerplant() {
-        return powerplant.get();
-    }
-
-    public ObjectProperty<PowerplantsPM> powerplantProperty() {
-        return powerplant;
-    }
-
-    public void setPowerplant(PowerplantsPM powerplant) {
-        this.powerplant.set(powerplant);
-    }
 
     //kraftwerke pro kanton zählen
     public int hydropowersPerCanton(String cantonShort){

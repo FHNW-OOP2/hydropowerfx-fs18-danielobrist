@@ -29,7 +29,6 @@ public class PowerplantsPM {
     private final StringProperty powerplantWaterbodies = new SimpleStringProperty();
     private final StringProperty powerplantImageURL = new SimpleStringProperty();
 
-    private final ObservableList<String> allPowerplants = FXCollections.observableArrayList();
 
     public PowerplantsPM() {
     }

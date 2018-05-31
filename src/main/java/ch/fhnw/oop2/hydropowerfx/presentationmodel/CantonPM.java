@@ -11,6 +11,9 @@ public class CantonPM {
 
     //alle anderen attribute nicht benötigt im moment
 
+    public CantonPM(){
+    }
+
     public CantonPM(String[] line, int totalPowerplantsPerCanton, double totalPowerPerCanton){
         setCantonName(line[0]);
         setCantonShort(line[1]);

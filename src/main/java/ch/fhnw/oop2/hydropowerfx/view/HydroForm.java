@@ -3,9 +3,12 @@ package ch.fhnw.oop2.hydropowerfx.view;
 import java.util.List;
 import java.util.Locale;
 
+import ch.fhnw.oop2.hydropowerfx.presentationmodel.CantonPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -164,9 +167,16 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(imageLabel, 0, 17);
         add(imageField, 0, 18);
     }
+
+    @Override
+    public void setupEventHandlers() {
+        maxPowerField.setOnKeyReleased(event -> root.refreshCantonsList());
+    }
+
     @Override
     public void setupBindings() {
         PowerplantsPM proxy = root.getHydroProxy();
+        CantonPM cantonProxy = root.getCantonProxy();
 
         idIndex.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
         nameIndex.textProperty().bind(proxy.powerplantNameProperty());
@@ -187,8 +197,14 @@ public class HydroForm extends GridPane implements ViewMixin {
         statusField.textProperty().bindBidirectional(proxy.powerplantStatusProperty());
         waterbodiesField.textProperty().bindBidirectional(proxy.powerplantWaterbodiesProperty());
         imageField.textProperty().bindBidirectional(proxy.powerplantImageURLProperty());
+
     }
 
-    
+    @Override
+    public void setupValueChangedListeners() {
+
+    }
+
+
 
 }

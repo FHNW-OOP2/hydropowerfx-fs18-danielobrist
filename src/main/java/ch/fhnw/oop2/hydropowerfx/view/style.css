@@ -1,13 +1,14 @@
-.root {
+.root{
+
 }
 .header {
     -fx-font-size       : 10;
-    -fx-background-color: linear-gradient(#c3e8cd 0%, #b4e4be 25%, #86d88b 100%);
+    -fx-background-color: #90b0d5;
     -fx-padding         : 5 15 5 15;
     -fx-spacing         : 10;
 }
 .form {
-    -fx-background-color: linear-gradient(#bfd3e8 0%, #a8c2de 25%, #90b0d5 100%);
+    -fx-background-color: #f6f6f6;
     -fx-padding         : 10 10 10 10;
     -fx-hgap            : 5;
     -fx-vgap            : 5;

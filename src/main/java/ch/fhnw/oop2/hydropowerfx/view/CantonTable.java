@@ -42,34 +42,38 @@ public class CantonTable extends VBox implements ViewMixin {
         TableColumn<CantonPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
         nameCol.setCellValueFactory(cell -> cell.getValue().cantonNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
 
-        TableColumn<CantonPM, String> shortCol = new TableColumn<>("Abkürzung"); //Kollonen definieren
-        shortCol.setCellValueFactory(cell -> cell.getValue().cantonShortProperty());//Werte für die col liefern (gemiendeNamen in col 1)
-
         TableColumn<CantonPM, Number> sumOfpowerplantsCol = new TableColumn<>("Anzahl Kraftwerke");
-        sumOfpowerplantsCol.setCellValueFactory(cell -> cell.getValue().hydropowersPerCantonProperty());  //hier den Kanton der Zeile übergeben
+        sumOfpowerplantsCol.setCellValueFactory(cell -> cell.getValue().hydropowersPerCantonProperty());
 
         TableColumn<CantonPM, Number> sumOfpowerCol = new TableColumn<>("Gesamtleistung");
-        sumOfpowerCol.setCellValueFactory(cell -> cell.getValue().powerPerCantonProperty());  //hier den Kanton der Zeile übergeben
+        sumOfpowerCol.setCellValueFactory(cell -> cell.getValue().powerPerCantonProperty());
 
-        tableView.getColumns().addAll(nameCol, shortCol, sumOfpowerplantsCol, sumOfpowerCol);
+        tableView.getColumns().addAll(nameCol, sumOfpowerplantsCol, sumOfpowerCol);
 
         return tableView;
     }
     @Override
     public void setupBindings() {
+        CantonPM cantonProxy = root.getCantonProxy();
+
+
     }
 
     @Override
     public void setupValueChangedListeners(){
         //changelistener to observe powerplants list and refresh the cantonTable if powerplants observablelist change
-        root.getAllPowerplants().addListener(new ListChangeListener<PowerplantsPM>() {
-            public void onChanged(Change<? extends PowerplantsPM> c) {
-                while(c.next()){
-                    //do changes here
-                    root.refreshCantonsList();
-                    table.refresh();
-                }
-            }
-        });
+        //not really working
+//        root.getAllPowerplants().addListener(new ListChangeListener<PowerplantsPM>() {
+//            public void onChanged(Change<? extends PowerplantsPM> c) {
+//                while(c.next()){
+//                    //do changes here
+//                    root.refreshCantonsList();
+//                    table.refresh();
+//                }
+//            }
+//        });
+
+
     }
+
 }
