@@ -9,6 +9,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 
+import java.text.DecimalFormat;
 import java.util.Locale;
 
 public class HydroTable extends VBox implements ViewMixin {
@@ -48,8 +49,6 @@ public class HydroTable extends VBox implements ViewMixin {
         TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme"); //ACHTUNG: Number, Integer geht nicht, man muss Number nehmen als Typparameter!
         startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
         startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
-
-
 
         TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Leistung (MW)");
         maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());

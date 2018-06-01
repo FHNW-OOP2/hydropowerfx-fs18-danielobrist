@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.CantonPM;
@@ -17,7 +18,6 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.converter.NumberStringConverter;
-
 
 
 public class HydroForm extends GridPane implements ViewMixin {
@@ -141,34 +141,35 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         add(nameIndex, 0, 0, 2, 1);
         add(siteCantonIndex, 0,1);
-        add(maxPowerIndex, 1, 1);
+        add(maxPowerIndex, 0, 2);
+        add(operationstartFirstIndex, 0, 3);
 
-        add(nameLabel, 0,3);
-        add(nameField, 0, 4);
-        add(cantonLabel, 1, 3);
-        add(cantonField, 1, 4);
-        add(typeLabel, 0, 5);
-        add(typeField, 0, 6);
-        add(siteLabel, 1, 5);
-        add(siteField, 1, 6);
-        add(maxWaterLabel, 0, 7);
-        add(maxWaterField, 0, 8);
-        add(maxPowerLabel, 1, 7);
-        add(maxPowerField, 1, 8);
-        add(startFirstLabel, 0, 9);
-        add(startFirstField, 0, 10);
-        add(startLastLabel, 1, 9);
-        add(startLastField, 1, 10);
-        add(latitudeLabel, 0,11);
-        add(latitudeField, 0, 12);
-        add(longitudeLabel, 1, 11);
-        add(longitudeField, 1, 12);
-        add(statusLabel, 0, 13);
-        add(statusField, 0, 14);
-        add(waterbodiesLabel, 1, 13);
-        add(waterbodiesField, 1, 14);
-        add(imageLabel, 0, 15);
-        add(imageField, 0, 16, 2, 1);
+        add(nameLabel, 0,5);
+        add(nameField, 0, 6);
+        add(cantonLabel, 1, 5);
+        add(cantonField, 1, 6);
+        add(typeLabel, 0, 7);
+        add(typeField, 0, 8);
+        add(siteLabel, 1, 7);
+        add(siteField, 1, 8);
+        add(maxWaterLabel, 0, 9);
+        add(maxWaterField, 0, 10);
+        add(maxPowerLabel, 1, 9);
+        add(maxPowerField, 1, 10);
+        add(startFirstLabel, 0, 11);
+        add(startFirstField, 0, 12);
+        add(startLastLabel, 1, 11);
+        add(startLastField, 1, 12);
+        add(latitudeLabel, 0,13);
+        add(latitudeField, 0, 14);
+        add(longitudeLabel, 1, 13);
+        add(longitudeField, 1, 14);
+        add(statusLabel, 0, 15);
+        add(statusField, 0, 16);
+        add(waterbodiesLabel, 1, 15);
+        add(waterbodiesField, 1, 16);
+        add(imageLabel, 0, 17);
+        add(imageField, 0, 18, 2, 1);
     }
 
     @Override
@@ -186,6 +187,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         maxPowerIndex.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
         siteIndex.textProperty().bind(proxy.powerplantSiteProperty());
         cantonIndex.textProperty().bind(proxy.powerplantCantonProperty());
+        operationstartFirstIndex.textProperty().bind(proxy.powerplantStartFirstProperty().asString());
         siteCantonIndex.textProperty().bind(proxy.powerplantSiteProperty().concat(", ").concat(proxy.powerplantCantonProperty()));
 
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());

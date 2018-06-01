@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.NumberFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.converter.NumberStringConverter;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
@@ -109,13 +111,11 @@ public class RootPM {
     //get highest ID + 100
     public int newHighestID() {
         Comparator<PowerplantsPM> comp = Comparator.comparingInt(PowerplantsPM::getPowerplantID);
-        PowerplantsPM hydropowerWithHighestId = allPowerplants.stream()
+        PowerplantsPM powerplantWithHighestId = allPowerplants.stream()
                 .max(comp)
                 .get();
 
-        int highestId = hydropowerWithHighestId.getPowerplantID();
-
-        return highestId + 100;
+        return powerplantWithHighestId.getPowerplantID() + 100;
     }
 
 
