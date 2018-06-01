@@ -1,14 +1,11 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
-import java.util.List;
 import java.util.Locale;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.CantonPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -86,7 +83,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         idLabel = new Label("Id");
 
         nameLabel = new Label("Name");
-        nameField = new TextField();
+        nameField = new TextField(" ");
 
         typeLabel = new Label("Type");
         typeField = new TextField();

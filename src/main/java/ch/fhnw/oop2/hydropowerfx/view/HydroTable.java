@@ -9,14 +9,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 
+import java.util.Locale;
+
 public class HydroTable extends VBox implements ViewMixin {
 
     private final RootPM root;
     private final HydroHeader header;
 
     private TableView<PowerplantsPM> tabelle;   //Tabellenansicht mit Kraftwerken auf jeder Zeile
-
-    private int searchStart = 0;
 
     public HydroTable(RootPM root, HydroHeader header) {
         this.root = root;
@@ -33,6 +33,9 @@ public class HydroTable extends VBox implements ViewMixin {
     public void initializeControls() {
         tabelle = initializePowerplantTabelle();
         tabelle.setEditable(true);
+        tabelle.getSelectionModel().selectFirst();
+        tabelle.requestFocus();
+        tabelle.getFocusModel().focus(1);
     }
 
     private TableView<PowerplantsPM> initializePowerplantTabelle() {
@@ -44,12 +47,12 @@ public class HydroTable extends VBox implements ViewMixin {
 
         TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme"); //ACHTUNG: Number, Integer geht nicht, man muss Number nehmen als Typparameter!
         startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
-        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter(new Locale("de", "CH"))));
 
 
         TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Leistung (MW)");
         maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());
-        maxpowerCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        maxpowerCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter(new Locale("de", "CH"))));
 
 
         tableView.getColumns().addAll(nameCol, maxpowerCol, startCol);
@@ -82,21 +85,15 @@ public class HydroTable extends VBox implements ViewMixin {
         tabelle.getSelectionModel().clearSelection();
     }
 
-    /*
-    public void search(){
+
+    public void search() {
         String searchText = header.getSearchString().toLowerCase();
-        for(int i = searchStart; i < tabelle.getItems().size(); i++){
-            if(tabelle.getItems().get(i).getPowerplantName().toLowerCase().contains(searchText)){
-                PowerplantsPM searchPowerplant = root.getAllPowerplants().get(i);
-                tabelle.scrollTo(searchPowerplant);
-                searchStart = i+1;
-                break;
-            }if(!tabelle.getItems().get(i).getPowerplantName().toLowerCase().contains(searchText)){
-                searchStart = 0;
-            }
-        }
+        tabelle.getItems().stream().filter(item -> item.getName().toLowerCase() == searchText).findAny()
+                .ifPresent(item -> {
+                    tabelle.getSelectionModel().select(item);
+                });
     }
-    */
+
 
     @Override
     public void layoutControls() {
@@ -117,7 +114,6 @@ public class HydroTable extends VBox implements ViewMixin {
     public void setupEventHandlers() {
 
     }
-
 
 
     @Override

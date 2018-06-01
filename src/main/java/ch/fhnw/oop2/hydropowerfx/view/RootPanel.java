@@ -38,9 +38,10 @@ public class RootPanel extends BorderPane implements ViewMixin {
     @Override
     public void layoutControls() {
 
+        setBottom(cantons);
+
         setTop(header);
         setCenter(splitpane);
-        setBottom(cantons);
 
         splitpane.getItems().add(0, table);
         splitpane.getItems().add(1, form);
