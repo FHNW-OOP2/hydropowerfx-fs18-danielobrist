@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -84,6 +85,39 @@ public class RootPM {
             throw new IllegalStateException("save failed");
         }
     }
+
+    //kraftwerke pro kanton zählen
+    public int hydropowersPerCanton(String cantonShort){
+        return (int) allPowerplants.stream()
+                .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
+                .count();
+    }
+
+    //alle maxpower pro kanton summieren
+    public double powerPerCanton(String cantonShort){
+        return allPowerplants.stream()
+                .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
+                .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
+    }
+
+    //liste refreshen inkl. gezählter und summierter werte
+    public void refreshCantonsList() {
+        allCantons.removeAll();
+        allCantons.addAll(readFromCantonFile());
+    }
+
+    //get highest ID + 100
+    public int newHighestID() {
+        Comparator<PowerplantsPM> comp = Comparator.comparingInt(PowerplantsPM::getPowerplantID);
+        PowerplantsPM hydropowerWithHighestId = allPowerplants.stream()
+                .max(comp)
+                .get();
+
+        int highestId = hydropowerWithHighestId.getPowerplantID();
+
+        return highestId + 100;
+    }
+
 
     private Stream<String> getStreamOfLines(String fileName) {
         try {
@@ -190,24 +224,4 @@ public class RootPM {
         this.selectedPowerplantId.set(selectedPowerplantId);
     }
 
-
-    //kraftwerke pro kanton zählen
-    public int hydropowersPerCanton(String cantonShort){
-        return (int) allPowerplants.stream()
-                .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
-                .count();
-    }
-
-    //alle maxpower pro kanton summieren
-    public double powerPerCanton(String cantonShort){
-        return allPowerplants.stream()
-                .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
-                .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
-    }
-
-    //liste refreshen inkl. gezählter und summierter werte
-    public void refreshCantonsList() {
-        allCantons.removeAll();
-        allCantons.addAll(readFromCantonFile());
-    }
 }

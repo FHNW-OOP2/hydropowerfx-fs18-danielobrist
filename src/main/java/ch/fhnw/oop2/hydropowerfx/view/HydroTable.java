@@ -50,6 +50,7 @@ public class HydroTable extends VBox implements ViewMixin {
         startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 
 
+
         TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Leistung (MW)");
         maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());
         maxpowerCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter(new Locale("de", "CH"))));
@@ -68,7 +69,7 @@ public class HydroTable extends VBox implements ViewMixin {
         tabelle.getSelectionModel().clearSelection();
 
         //create new empty powerplant and add it to model
-        PowerplantsPM powerplant = new PowerplantsPM();
+        PowerplantsPM powerplant = new PowerplantsPM(root.newHighestID());
         tabelle.getItems().add(powerplant);
 
         //get last row

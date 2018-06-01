@@ -33,6 +33,10 @@ public class PowerplantsPM {
     public PowerplantsPM() {
     }
 
+    public PowerplantsPM(Integer id){
+        setPowerplantID(id);
+    }
+
     public PowerplantsPM(String[] line) {
         setPowerplantID(Integer.valueOf(line[0]));
         setPowerplantName(line[1]);
