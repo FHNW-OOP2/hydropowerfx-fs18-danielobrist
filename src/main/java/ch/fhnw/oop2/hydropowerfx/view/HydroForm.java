@@ -6,6 +6,8 @@ import ch.fhnw.oop2.hydropowerfx.presentationmodel.CantonPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -31,6 +33,7 @@ public class HydroForm extends GridPane implements ViewMixin {
     private Label siteIndex;
     private Label operationstartFirstIndex;
     private Label cantonIndex;
+    private Label siteCantonIndex;
 
 
     private Label idLabel;
@@ -82,6 +85,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         siteIndex = new Label();
         operationstartFirstIndex = new Label();
         cantonIndex = new Label();
+        siteCantonIndex = new Label();
 
         idLabel = new Label("Id");
 
@@ -129,16 +133,15 @@ public class HydroForm extends GridPane implements ViewMixin {
     public void layoutControls() {
         ColumnConstraints cc = new ColumnConstraints();
         cc.setHgrow(Priority.ALWAYS);
-        getColumnConstraints().addAll(cc, cc, cc, cc, cc, cc, cc, cc);
+        getColumnConstraints().addAll(cc, cc);
 
         RowConstraints gc = new RowConstraints();
         gc.setVgrow(Priority.ALWAYS);
         getRowConstraints().addAll(gc, gc, gc, gc, gc, gc, gc, gc);
 
-        add(nameIndex, 0, 0);
-        add(siteIndex, 0, 1);
-        add(cantonIndex, 1, 1);
-        add(maxPowerIndex, 0, 2);
+        add(nameIndex, 0, 0, 2, 1);
+        add(siteCantonIndex, 0,1);
+        add(maxPowerIndex, 1, 1);
 
         add(nameLabel, 0,3);
         add(nameField, 0, 4);
@@ -165,7 +168,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(waterbodiesLabel, 1, 13);
         add(waterbodiesField, 1, 14);
         add(imageLabel, 0, 15);
-        add(imageField, 0, 16);
+        add(imageField, 0, 16, 2, 1);
     }
 
     @Override
@@ -183,6 +186,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         maxPowerIndex.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
         siteIndex.textProperty().bind(proxy.powerplantSiteProperty());
         cantonIndex.textProperty().bind(proxy.powerplantCantonProperty());
+        siteCantonIndex.textProperty().bind(proxy.powerplantSiteProperty().concat(", ").concat(proxy.powerplantCantonProperty()));
 
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());
         cantonField.textProperty().bindBidirectional(proxy.powerplantCantonProperty());
@@ -202,6 +206,18 @@ public class HydroForm extends GridPane implements ViewMixin {
 
     @Override
     public void setupValueChangedListeners() {
+        // force textfield to be numeric only
+        startFirstField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                startFirstField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        startLastField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                startLastField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
 
     }
 

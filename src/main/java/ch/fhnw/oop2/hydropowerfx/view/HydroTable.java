@@ -47,7 +47,7 @@ public class HydroTable extends VBox implements ViewMixin {
 
         TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme"); //ACHTUNG: Number, Integer geht nicht, man muss Number nehmen als Typparameter!
         startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
-        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter(new Locale("de", "CH"))));
+        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 
 
         TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Leistung (MW)");
