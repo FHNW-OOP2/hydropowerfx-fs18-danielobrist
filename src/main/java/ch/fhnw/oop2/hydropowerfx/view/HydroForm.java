@@ -12,6 +12,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.converter.NumberStringConverter;
 
 
@@ -75,6 +77,7 @@ public class HydroForm extends GridPane implements ViewMixin {
     public void initializeControls() {
         idIndex = new Label();
         nameIndex = new Label();
+        nameIndex.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
         maxPowerIndex = new Label();
         siteIndex = new Label();
         operationstartFirstIndex = new Label();
@@ -159,10 +162,10 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(longitudeField, 1, 12);
         add(statusLabel, 0, 13);
         add(statusField, 0, 14);
-        add(waterbodiesLabel, 0, 15);
-        add(waterbodiesField, 0, 16);
-        add(imageLabel, 0, 17);
-        add(imageField, 0, 18);
+        add(waterbodiesLabel, 1, 13);
+        add(waterbodiesField, 1, 14);
+        add(imageLabel, 0, 15);
+        add(imageField, 0, 16);
     }
 
     @Override

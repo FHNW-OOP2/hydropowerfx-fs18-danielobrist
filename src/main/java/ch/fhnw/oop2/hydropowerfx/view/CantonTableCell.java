@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import java.util.HashMap;
 import java.util.Map;
 
-class KantonTableCell extends TableCell<PowerplantsPM, String> {
+class CantonTableCell extends TableCell<PowerplantsPM, String> {
     private static final Map<String, Image> WAPPEN = new HashMap<>();
 
     private static final Insets INSETS = new Insets(1, 8, 1, 5);

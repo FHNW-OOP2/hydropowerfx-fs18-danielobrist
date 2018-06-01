@@ -32,7 +32,7 @@ public class CantonTable extends VBox implements ViewMixin {
 
     @Override
     public void layoutControls() {
-        setVgrow(table, Priority.ALWAYS);
+
         getChildren().addAll(table);
     }
 
@@ -61,18 +61,6 @@ public class CantonTable extends VBox implements ViewMixin {
 
     @Override
     public void setupValueChangedListeners(){
-        //changelistener to observe powerplants list and refresh the cantonTable if powerplants observablelist change
-        //not really working
-//        root.getAllPowerplants().addListener(new ListChangeListener<PowerplantsPM>() {
-//            public void onChanged(Change<? extends PowerplantsPM> c) {
-//                while(c.next()){
-//                    //do changes here
-//                    root.refreshCantonsList();
-//                    table.refresh();
-//                }
-//            }
-//        });
-
 
     }
 

@@ -7,7 +7,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+
 
 public class HydroHeader extends HBox implements ViewMixin {
 
@@ -38,7 +40,14 @@ public class HydroHeader extends HBox implements ViewMixin {
         deleteButton = new Button("Delete");
         saveButton = new Button("Save");
         searchField = new TextField();
-        searchField.setPromptText("Nach Name suchen");
+        searchField.setPromptText("Suche");
+
+        Tooltip addTooltip = new Tooltip("Erstellt eine neue leere Zeile.");
+        addButton.setTooltip(addTooltip);
+        Tooltip deleteTooltip = new Tooltip("Löscht die ausgewählte Zeile.");
+        deleteButton.setTooltip(deleteTooltip);
+        Tooltip saveTooltip = new Tooltip("Speichert alle Änderungen ab.");
+        saveButton.setTooltip(saveTooltip);
     }
 
     @Override

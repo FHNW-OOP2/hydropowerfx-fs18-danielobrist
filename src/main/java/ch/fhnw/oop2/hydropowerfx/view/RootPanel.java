@@ -33,6 +33,7 @@ public class RootPanel extends BorderPane implements ViewMixin {
         form = new HydroForm(model);
         table = new HydroTable(model, header);
         header = new HydroHeader(model, table);
+
     }
 
     @Override
