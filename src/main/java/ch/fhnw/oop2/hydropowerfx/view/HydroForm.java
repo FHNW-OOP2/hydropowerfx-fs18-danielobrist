@@ -218,6 +218,12 @@ public class HydroForm extends GridPane implements ViewMixin {
             }
         });
 
+        maxPowerField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != oldValue){
+                root.updateCantonTable();
+            }
+        });
+
 
     }
 

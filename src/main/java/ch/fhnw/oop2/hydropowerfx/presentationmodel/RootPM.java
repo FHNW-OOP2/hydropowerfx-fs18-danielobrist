@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,7 +48,7 @@ public class RootPM {
                 }
 
         );
-        hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> updateCantonTable());
+        hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(() -> updateCantonTable()));
         // hydroProxy.hydropowersPerCantonProperty().addListener((observable, oldValue, newValue) -> updateCantonTable());
 
 
@@ -129,7 +130,34 @@ public class RootPM {
     }
 
     public void updateCantonTable() {
+        if (allCantons != null) {
+            allCantons.clear();
+        }
+        // try without clearing the whole table... table.getItems().get(1)
+        List<String> cantonStrings = this.allPowerplants.stream()
+                .map(PowerplantsPM::getPowerplantCanton)
+                .distinct()
+                .sorted()
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
 
+        for (String canton : cantonStrings) {
+            CantonPM c = new CantonPM();
+            c.setCantonName(canton);
+            for (PowerplantsPM powerplant : allPowerplants) {
+                if (powerplant.getPowerplantCanton().equals(canton)) {
+                    if(powerplant.getPowerplantMaxPower()==0){
+                        powerplant.setPowerplantMaxPower(0);
+                    }
+                    c.powerPerCantonProperty().setValue(c.powerPerCantonProperty().getValue() + powerplant.getPowerplantMaxPower());
+                    c.hydropowersPerCantonProperty()
+                            .setValue(c.hydropowersPerCantonProperty()
+                                    .getValue() + 1);
+                }
+
+            }
+            allCantons.add(c);
+        }
     }
 
 
