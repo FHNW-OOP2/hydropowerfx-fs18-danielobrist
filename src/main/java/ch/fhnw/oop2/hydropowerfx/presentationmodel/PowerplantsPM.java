@@ -33,8 +33,9 @@ public class PowerplantsPM {
     public PowerplantsPM() {
     }
 
-    public PowerplantsPM(Integer id){
+    public PowerplantsPM(Integer id, String canton){
         setPowerplantID(id);
+        setPowerplantCanton(canton);
     }
 
     public PowerplantsPM(String[] line) {
