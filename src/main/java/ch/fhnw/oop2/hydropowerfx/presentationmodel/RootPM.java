@@ -49,7 +49,7 @@ public class RootPM {
 
         );
         hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(() -> updateCantonTable()));
-        // hydroProxy.hydropowersPerCantonProperty().addListener((observable, oldValue, newValue) -> updateCantonTable());
+        hydroProxy.powerplantCantonProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(() -> updateCantonTable()));
 
 
     }
