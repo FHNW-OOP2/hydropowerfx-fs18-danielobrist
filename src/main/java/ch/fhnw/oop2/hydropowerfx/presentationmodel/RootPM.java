@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.NumberFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +15,6 @@ import java.util.stream.Stream;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.util.converter.NumberStringConverter;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
@@ -30,8 +28,6 @@ public class RootPM {
     private final ObservableList<CantonPM> allCantons = FXCollections.observableArrayList();
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
-    private final CantonPM cantonProxy = new CantonPM();
-
 
     public RootPM() {
         allPowerplants.addAll(readFromFile());
@@ -51,12 +47,11 @@ public class RootPM {
                 }
 
         );
-        hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> updateCantonInfos());
-        // hydroProxy.powerplantPerCantonProperty().addListener((observable, oldValue, newValue) -> updateCantonInfos());
+        hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> updateCantonTable());
+        // hydroProxy.hydropowersPerCantonProperty().addListener((observable, oldValue, newValue) -> updateCantonTable());
 
 
     }
-
 
 
     private List<PowerplantsPM> readFromFile() {
@@ -66,6 +61,7 @@ public class RootPM {
                     .collect(Collectors.toList());                        // alles aufsammeln
         }
     }
+
     private List<CantonPM> readFromCantonFile() {
         try (Stream<String> stream = getStreamOfLines(FILE_NAME_CANTONS)) {
             return stream.skip(1)
@@ -94,14 +90,14 @@ public class RootPM {
     }
 
     //kraftwerke pro kanton zählen
-    public int hydropowersPerCanton(String cantonShort){
+    public int hydropowersPerCanton(String cantonShort) {
         return (int) allPowerplants.stream()
                 .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
                 .count();
     }
 
     //alle maxpower pro kanton summieren
-    public double powerPerCanton(String cantonShort){
+    public double powerPerCanton(String cantonShort) {
         return allPowerplants.stream()
                 .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
                 .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
@@ -123,9 +119,10 @@ public class RootPM {
         return powerplantWithHighestId.getPowerplantID() + 100;
     }
 
-    public void updateCantonInfos() {
+    public void updateCantonTable() {
         if (allCantons != null) {
-            allCantons.clear();}        //anstatt alles löschen nur werte updaten
+            allCantons.clear();
+        }        //anstatt alles löschen nur werte updaten?
         List<String> cantonStrings = this.allPowerplants.stream()
                 .map(PowerplantsPM::getPowerplantCanton)
                 .distinct()
@@ -135,12 +132,9 @@ public class RootPM {
         for (String canton : cantonStrings) {
             CantonPM c = new CantonPM();
             c.setCantonName(canton);
-            for (PowerplantsPM wasserwerk : allPowerplants) {
-                if (wasserwerk.getPowerplantCanton().equals(canton)) {
-                    if(wasserwerk.getPowerplantMaxPower()== 0){
-                        wasserwerk.setPowerplantMaxPower(0);
-                    }
-                    c.powerPerCantonProperty().setValue(c.powerPerCantonProperty().getValue() + (wasserwerk.getPowerplantMaxPower()));
+            for (PowerplantsPM powerplant : allPowerplants) {
+                if (powerplant.getPowerplantCanton().equals(canton)) {
+                    c.powerPerCantonProperty().setValue(c.powerPerCantonProperty().getValue() + (powerplant.getPowerplantMaxPower()));
                     c.hydropowersPerCantonProperty()
                             .setValue(c.hydropowersPerCantonProperty()
                                     .getValue() + 1);
@@ -159,7 +153,7 @@ public class RootPM {
         }
     }
 
-    private Path getPath(String fileName)  {
+    private Path getPath(String fileName) {
         try {
             return Paths.get(getClass().getResource(fileName).toURI());
         } catch (URISyntaxException e) {
@@ -172,7 +166,7 @@ public class RootPM {
     }
 
     private void bindToProxy(PowerplantsPM powerplant) {
-        hydroProxy.powerplantIDProperty()  .bindBidirectional(powerplant.powerplantIDProperty());
+        hydroProxy.powerplantIDProperty().bindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().bindBidirectional(powerplant.nameProperty());
         hydroProxy.powerplantTypeProperty().bindBidirectional(powerplant.powerplantTypeProperty());
         hydroProxy.powerplantMaxPowerProperty().bindBidirectional(powerplant.powerplantMaxPowerProperty());
@@ -189,7 +183,7 @@ public class RootPM {
     }
 
     private void unbindFromProxy(PowerplantsPM powerplant) {
-        hydroProxy.powerplantIDProperty()  .unbindBidirectional(powerplant.powerplantIDProperty());
+        hydroProxy.powerplantIDProperty().unbindBidirectional(powerplant.powerplantIDProperty());
         hydroProxy.nameProperty().unbindBidirectional(powerplant.nameProperty());
         hydroProxy.powerplantTypeProperty().unbindBidirectional(powerplant.powerplantTypeProperty());
         hydroProxy.powerplantMaxPowerProperty().unbindBidirectional(powerplant.powerplantMaxPowerProperty());
@@ -206,18 +200,6 @@ public class RootPM {
 
     }
 
-    public CantonPM getCantonProxy() {
-        return cantonProxy;
-    }
-
-    private void bindToCantonProxy(CantonPM canton) {
-        hydroProxy.powerplantMaxPowerProperty().bindBidirectional(canton.hydropowersPerCantonProperty());
-
-    }
-    private void unbindFromCantonProxy(CantonPM canton) {
-        hydroProxy.powerplantMaxPowerProperty().bindBidirectional(canton.hydropowersPerCantonProperty());
-
-    }
     public PowerplantsPM getPowerplant(int id) {
         return allPowerplants.stream()
                 .filter(powerplantsPM -> powerplantsPM.getPowerplantID() == id)
@@ -228,6 +210,7 @@ public class RootPM {
     public ObservableList<PowerplantsPM> getAllPowerplants() {
         return allPowerplants;
     }
+
     public ObservableList<CantonPM> getAllCantons() {
         return allCantons;
     }

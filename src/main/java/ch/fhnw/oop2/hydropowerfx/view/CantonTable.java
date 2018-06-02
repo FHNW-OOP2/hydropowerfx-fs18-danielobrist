@@ -28,6 +28,7 @@ public class CantonTable extends VBox implements ViewMixin {
     @Override
     public void initializeControls() {
         table = initializeTable();
+        table.setMaxHeight(190);
     }
 
     @Override
@@ -51,10 +52,12 @@ public class CantonTable extends VBox implements ViewMixin {
         tableView.getColumns().addAll(nameCol, sumOfpowerplantsCol, sumOfpowerCol);
 
         return tableView;
+
+
     }
     @Override
     public void setupBindings() {
-        CantonPM cantonProxy = root.getCantonProxy();
+
 
 
     }

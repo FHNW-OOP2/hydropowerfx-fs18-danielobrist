@@ -174,13 +174,11 @@ public class HydroForm extends GridPane implements ViewMixin {
 
     @Override
     public void setupEventHandlers() {
-        maxPowerField.setOnKeyReleased(event -> root.refreshCantonsList());
     }
 
     @Override
     public void setupBindings() {
         PowerplantsPM proxy = root.getHydroProxy();
-        CantonPM cantonProxy = root.getCantonProxy();
 
         idIndex.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
         nameIndex.textProperty().bind(proxy.powerplantNameProperty());
