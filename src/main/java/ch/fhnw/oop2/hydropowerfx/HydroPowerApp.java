@@ -10,23 +10,23 @@ import ch.fhnw.oop2.hydropowerfx.view.RootPanel;
 
 public class HydroPowerApp extends Application {
 
-	@Override
-	public void start(Stage primaryStage) {
-		RootPM model    = new RootPM();
-		Parent rootPanel = new RootPanel(model);
+    @Override
+    public void start(Stage primaryStage) {
+        RootPM model = new RootPM();
+        Parent rootPanel = new RootPanel(model);
 
-		Scene scene = new Scene(rootPanel);
+        Scene scene = new Scene(rootPanel);
 
-		primaryStage.titleProperty().bind(model.applicationTitleProperty());
-		primaryStage.setScene(scene);
-		primaryStage.setWidth(1000);
+        primaryStage.titleProperty().bind(model.applicationTitleProperty());
+        primaryStage.setScene(scene);
+        primaryStage.setWidth(1000);
 
-		primaryStage.show();
+        primaryStage.show();
 
-		model.setSelectedPowerplantId(100100);
-	}
+        model.setSelectedPowerplantId(100100);
+    }
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

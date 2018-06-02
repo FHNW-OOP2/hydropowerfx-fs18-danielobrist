@@ -2,19 +2,16 @@ package ch.fhnw.oop2.hydropowerfx.presentationmodel;
 
 import javafx.beans.property.*;
 
-//Kanton;Kürzel;Kantonsnummer;Standesstimme;Beitritt;Hauptort;Einwohner;Ausländer;Fläche;Einwohnerdichte;Gemeinden;Amtssprache
 public class CantonPM {
     private final StringProperty cantonName = new SimpleStringProperty();
     private final StringProperty cantonShort = new SimpleStringProperty();
     public IntegerProperty hydropowersPerCanton = new SimpleIntegerProperty();
     public DoubleProperty powerPerCanton = new SimpleDoubleProperty();
 
-    //alle anderen attribute nicht benötigt im moment
-
-    public CantonPM(){
+    public CantonPM() {
     }
 
-    public CantonPM(String[] line, int totalPowerplantsPerCanton, double totalPowerPerCanton){
+    public CantonPM(String[] line, int totalPowerplantsPerCanton, double totalPowerPerCanton) {
         setCantonName(line[0]);
         setCantonShort(line[1]);
         setHydropowersPerCanton(totalPowerplantsPerCanton);
@@ -22,7 +19,6 @@ public class CantonPM {
     }
 
     //getter and setter
-
 
     public double getPowerPerCanton() {
         return powerPerCanton.get();

@@ -95,9 +95,18 @@ public class RootPM {
         setSelectedPowerplantId(newHighestID() - 100); //sets selection to new added row
     }
 
-    public void delete(){
+    public void delete() {
         allPowerplants.remove(getPowerplant(getSelectedPowerplantId()));
     }
+
+
+    /*public void search() {
+        String searchText = header.getSearchString().toLowerCase();
+        tabelle.getItems().stream().filter(item -> item.getName().toLowerCase() == searchText).findAny()
+                .ifPresent(item -> {
+                    tabelle.getSelectionModel().select(item);
+                });
+    }*/
 
     //kraftwerke pro kanton zählen
     public int hydropowersPerCanton(String cantonShort) {
@@ -111,12 +120,6 @@ public class RootPM {
         return allPowerplants.stream()
                 .filter(powerplant -> powerplant.getPowerplantCanton().equals(cantonShort))
                 .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
-    }
-
-    //liste refreshen inkl. gezählter und summierter werte
-    public void refreshCantonsList() {
-        allCantons.removeAll();
-        allCantons.addAll(readFromCantonFile());
     }
 
     //get highest ID + 100
@@ -133,20 +136,19 @@ public class RootPM {
         if (allCantons != null) {
             allCantons.clear();
         }
-        // try without clearing the whole table... table.getItems().get(1)
-        List<String> cantonStrings = this.allPowerplants.stream()
+        List<String> cantonShorts = this.allPowerplants.stream()
                 .map(PowerplantsPM::getPowerplantCanton)
                 .distinct()
                 .sorted()
                 .filter(s -> !s.isEmpty())
                 .collect(Collectors.toList());
 
-        for (String canton : cantonStrings) {
+        cantonShorts.forEach(canton -> {
             CantonPM c = new CantonPM();
             c.setCantonName(canton);
             for (PowerplantsPM powerplant : allPowerplants) {
                 if (powerplant.getPowerplantCanton().equals(canton)) {
-                    if(powerplant.getPowerplantMaxPower()==0){
+                    if (powerplant.getPowerplantMaxPower() == 0) {
                         powerplant.setPowerplantMaxPower(0);
                     }
                     c.powerPerCantonProperty().setValue(c.powerPerCantonProperty().getValue() + powerplant.getPowerplantMaxPower());
@@ -157,7 +159,7 @@ public class RootPM {
 
             }
             allCantons.add(c);
-        }
+        });
     }
 
 

@@ -16,7 +16,7 @@ public class HydroTable extends VBox implements ViewMixin {
 
     private final RootPM root;
 
-    private TableView<PowerplantsPM> tabelle;   //Tabellenansicht mit Kraftwerken auf jeder Zeile
+    private TableView<PowerplantsPM> tabelle;
 
     public HydroTable(RootPM root) {
         this.root = root;
@@ -40,11 +40,11 @@ public class HydroTable extends VBox implements ViewMixin {
     private TableView<PowerplantsPM> initializePowerplantTabelle() {
         TableView<PowerplantsPM> tableView = new TableView<>(root.getAllPowerplants());
 
-        TableColumn<PowerplantsPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
-        nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern
+        TableColumn<PowerplantsPM, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn()); //makes cells editable (ENTER saves Value in Table)
 
-        TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme"); //ACHTUNG: Number, Integer geht nicht, man muss Number nehmen als Typparameter!
+        TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme");
         startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
         startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
 
@@ -58,41 +58,6 @@ public class HydroTable extends VBox implements ViewMixin {
         return tableView;
     }
 
-//    public void addRow() {
-//        //get position
-//        TablePosition pos = tabelle.getFocusModel().getFocusedCell();
-//
-//        //clear current selection
-//        tabelle.getSelectionModel().clearSelection();
-//
-//        //create new empty powerplant and add it to model
-//        PowerplantsPM powerplant = new PowerplantsPM(root.newHighestID());
-//        tabelle.getItems().add(powerplant);
-//
-//        //get last row
-//        int row = tabelle.getItems().size() - 1;
-//        tabelle.getSelectionModel().select(row, pos.getTableColumn());
-//
-//        //scroll to newly created row and select it
-//        tabelle.scrollTo(powerplant);
-//    }
-//
-//    public void deleteSelectedRows() {
-//        tabelle.getItems().removeAll(tabelle.getSelectionModel().getSelectedItems());
-//        //clears selection, because table selects by index
-//        tabelle.getSelectionModel().clearSelection();
-//    }
-
-/*
-    public void search() {
-        String searchText = header.getSearchString().toLowerCase();
-        tabelle.getItems().stream().filter(item -> item.getName().toLowerCase() == searchText).findAny()
-                .ifPresent(item -> {
-                    tabelle.getSelectionModel().select(item);
-                });
-    }*/
-
-
     @Override
     public void layoutControls() {
         setVgrow(tabelle, Priority.ALWAYS);
@@ -103,8 +68,6 @@ public class HydroTable extends VBox implements ViewMixin {
 
     @Override
     public void setupBindings() {
-        PowerplantsPM proxy = root.getHydroProxy();
-
 
     }
 
