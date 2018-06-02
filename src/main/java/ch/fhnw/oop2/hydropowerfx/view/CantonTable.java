@@ -64,6 +64,9 @@ public class CantonTable extends VBox implements ViewMixin {
 
     @Override
     public void setupValueChangedListeners(){
+        table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            root.setSelectedPowerplantId(newValue.getHydropowersPerCanton());
+        });
 
     }
 

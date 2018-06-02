@@ -91,6 +91,7 @@ public class RootPM {
 
     public void add() {
         allPowerplants.addAll(new PowerplantsPM(newHighestID()));
+        setSelectedPowerplantId(newHighestID() - 100); //sets selection to new added row
     }
 
     public void delete(){

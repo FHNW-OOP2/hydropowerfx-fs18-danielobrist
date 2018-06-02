@@ -1,8 +1,6 @@
 package ch.fhnw.oop2.hydropowerfx;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,7 +13,6 @@ public class HydroPowerApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		RootPM model    = new RootPM();
-
 		Parent rootPanel = new RootPanel(model);
 
 		Scene scene = new Scene(rootPanel);

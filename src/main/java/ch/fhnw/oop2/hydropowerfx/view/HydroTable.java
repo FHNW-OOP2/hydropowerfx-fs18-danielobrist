@@ -131,7 +131,7 @@ public class HydroTable extends VBox implements ViewMixin {
                 //clear current selection
                 tabelle.getSelectionModel().clearSelection();
 
-                //get last row
+                //go to last row
                 int row = tabelle.getItems().size() - 1;
                 tabelle.getSelectionModel().select(row, pos.getTableColumn());
                 tabelle.scrollTo(c.getFrom());
