@@ -89,6 +89,14 @@ public class RootPM {
         }
     }
 
+    public void add() {
+        allPowerplants.addAll(new PowerplantsPM(newHighestID()));
+    }
+
+    public void delete(){
+        allPowerplants.remove(getPowerplant(getSelectedPowerplantId()));
+    }
+
     //kraftwerke pro kanton zählen
     public int hydropowersPerCanton(String cantonShort) {
         return (int) allPowerplants.stream()
@@ -120,28 +128,7 @@ public class RootPM {
     }
 
     public void updateCantonTable() {
-        if (allCantons != null) {
-            allCantons.clear();
-        }        //anstatt alles löschen nur werte updaten?
-        List<String> cantonStrings = this.allPowerplants.stream()
-                .map(PowerplantsPM::getPowerplantCanton)
-                .distinct()
-                .sorted()
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toList());
-        for (String canton : cantonStrings) {
-            CantonPM c = new CantonPM();
-            c.setCantonName(canton);
-            for (PowerplantsPM powerplant : allPowerplants) {
-                if (powerplant.getPowerplantCanton().equals(canton)) {
-                    c.powerPerCantonProperty().setValue(c.powerPerCantonProperty().getValue() + (powerplant.getPowerplantMaxPower()));
-                    c.hydropowersPerCantonProperty()
-                            .setValue(c.hydropowersPerCantonProperty()
-                                    .getValue() + 1);
-                }
-            }
-            allCantons.add(c);
-        }
+
     }
 
 

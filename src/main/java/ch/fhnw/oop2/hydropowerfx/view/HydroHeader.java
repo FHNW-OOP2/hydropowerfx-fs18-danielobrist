@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 public class HydroHeader extends HBox implements ViewMixin {
 
     private final RootPM root;
-    private final HydroTable table;
 
     private Button addButton;
     private Button deleteButton;
@@ -23,9 +22,8 @@ public class HydroHeader extends HBox implements ViewMixin {
     private StringProperty searchString = new SimpleStringProperty();
 
 
-    public HydroHeader(RootPM root, HydroTable table) {
+    public HydroHeader(RootPM root) {
         this.root = root;
-        this.table = table;
         init();
     }
 
@@ -60,10 +58,12 @@ public class HydroHeader extends HBox implements ViewMixin {
     public void setupEventHandlers() {
         saveButton.setOnAction(event -> root.save());
 
-        addButton.setOnAction(event -> table.addRow());
+        // addButton.setOnAction(event -> table.addRow());
+        addButton.setOnAction(event -> root.add());
         addButton.setFocusTraversable(false);
 
-        deleteButton.setOnAction(event -> table.deleteSelectedRows());
+        // deleteButton.setOnAction(event -> table.deleteSelectedRows());
+        deleteButton.setOnAction(event -> root.delete());
         deleteButton.setFocusTraversable(false);
 
         // searchField.setOnKeyReleased(event -> table.search());

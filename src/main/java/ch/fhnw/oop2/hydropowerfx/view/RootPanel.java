@@ -31,8 +31,8 @@ public class RootPanel extends BorderPane implements ViewMixin {
     public void initializeControls() {
         cantons = new CantonTable(model);
         form = new HydroForm(model);
-        table = new HydroTable(model, header);
-        header = new HydroHeader(model, table);
+        table = new HydroTable(model);
+        header = new HydroHeader(model);
 
     }
 
