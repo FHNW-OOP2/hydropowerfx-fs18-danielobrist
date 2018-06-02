@@ -184,7 +184,7 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         idIndex.textProperty()  .bind             (proxy.powerplantIDProperty().asString());
         nameIndex.textProperty().bind(proxy.powerplantNameProperty());
-        maxPowerIndex.textProperty().bindBidirectional(proxy.powerplantMaxPowerProperty(), new NumberStringConverter(new Locale("de", "CH")));
+        maxPowerIndex.textProperty().bind(proxy.powerplantMaxPowerProperty().asString("%.2f MW"));
         siteIndex.textProperty().bind(proxy.powerplantSiteProperty());
         cantonIndex.textProperty().bind(proxy.powerplantCantonProperty());
         operationstartFirstIndex.textProperty().bind(proxy.powerplantStartFirstProperty().asString());

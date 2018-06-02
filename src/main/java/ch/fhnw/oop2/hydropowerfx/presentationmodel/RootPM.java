@@ -49,10 +49,15 @@ public class RootPM {
                         bindToProxy(newSelection);
                     }
                 }
+
         );
+        hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> updateCantonInfos());
+        // hydroProxy.powerplantPerCantonProperty().addListener((observable, oldValue, newValue) -> updateCantonInfos());
 
 
     }
+
+
 
     private List<PowerplantsPM> readFromFile() {
         try (Stream<String> stream = getStreamOfLines(FILE_NAME)) {
@@ -116,6 +121,33 @@ public class RootPM {
                 .get();
 
         return powerplantWithHighestId.getPowerplantID() + 100;
+    }
+
+    public void updateCantonInfos() {
+        if (allCantons != null) {
+            allCantons.clear();}        //anstatt alles löschen nur werte updaten
+        List<String> cantonStrings = this.allPowerplants.stream()
+                .map(PowerplantsPM::getPowerplantCanton)
+                .distinct()
+                .sorted()
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+        for (String canton : cantonStrings) {
+            CantonPM c = new CantonPM();
+            c.setCantonName(canton);
+            for (PowerplantsPM wasserwerk : allPowerplants) {
+                if (wasserwerk.getPowerplantCanton().equals(canton)) {
+                    if(wasserwerk.getPowerplantMaxPower()== 0){
+                        wasserwerk.setPowerplantMaxPower(0);
+                    }
+                    c.powerPerCantonProperty().setValue(c.powerPerCantonProperty().getValue() + (wasserwerk.getPowerplantMaxPower()));
+                    c.hydropowersPerCantonProperty()
+                            .setValue(c.hydropowersPerCantonProperty()
+                                    .getValue() + 1);
+                }
+            }
+            allCantons.add(c);
+        }
     }
 
 

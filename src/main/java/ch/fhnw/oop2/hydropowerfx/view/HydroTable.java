@@ -43,7 +43,7 @@ public class HydroTable extends VBox implements ViewMixin {
         TableView<PowerplantsPM> tableView = new TableView<>(root.getAllPowerplants());
 
         TableColumn<PowerplantsPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
-        nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
+        nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());//Werte für die col liefern
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn()); //makes cells editable (ENTER saves Value in Table)
 
         TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme"); //ACHTUNG: Number, Integer geht nicht, man muss Number nehmen als Typparameter!
