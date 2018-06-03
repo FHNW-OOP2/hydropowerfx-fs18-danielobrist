@@ -58,15 +58,13 @@ public class HydroHeader extends HBox implements ViewMixin {
     public void setupEventHandlers() {
         saveButton.setOnAction(event -> root.save());
 
-        // addButton.setOnAction(event -> table.addRow());
         addButton.setOnAction(event -> root.add());
         addButton.setFocusTraversable(false);
 
-        // deleteButton.setOnAction(event -> table.deleteSelectedRows());
         deleteButton.setOnAction(event -> root.delete());
         deleteButton.setFocusTraversable(false);
 
-        // searchField.setOnKeyReleased(event -> table.search());
+        searchField.setOnKeyReleased(event -> root.search(searchField.getText()));
     }
 
     @Override

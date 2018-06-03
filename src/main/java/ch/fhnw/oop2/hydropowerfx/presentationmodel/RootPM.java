@@ -92,7 +92,7 @@ public class RootPM {
 
     public void add() {
         allPowerplants.addAll(new PowerplantsPM(newHighestID(), ""));
-        setSelectedPowerplantId(newHighestID() - 100); //sets selection to new added row
+        setSelectedPowerplantId(newHighestID() - 1); //sets selection to new added row
     }
 
     public void delete() {
@@ -100,13 +100,13 @@ public class RootPM {
     }
 
 
-    /*public void search() {
-        String searchText = header.getSearchString().toLowerCase();
-        tabelle.getItems().stream().filter(item -> item.getName().toLowerCase() == searchText).findAny()
+    public void search(String searchtext) {
+        String searchTextSmall = searchtext.toLowerCase();
+        allPowerplants.stream().filter(item -> item.getName().toLowerCase() == searchTextSmall).findAny()
                 .ifPresent(item -> {
-                    tabelle.getSelectionModel().select(item);
+                    setSelectedPowerplantId(item.getPowerplantID());
                 });
-    }*/
+    }
 
     //kraftwerke pro kanton zählen
     public int hydropowersPerCanton(String cantonShort) {
@@ -122,14 +122,14 @@ public class RootPM {
                 .mapToDouble(PowerplantsPM::getPowerplantMaxPower).sum();
     }
 
-    //get highest ID + 100
+    //get highest ID + 1
     public int newHighestID() {
         Comparator<PowerplantsPM> comp = Comparator.comparingInt(PowerplantsPM::getPowerplantID);
         PowerplantsPM powerplantWithHighestId = allPowerplants.stream()
                 .max(comp)
                 .get();
 
-        return powerplantWithHighestId.getPowerplantID() + 100;
+        return powerplantWithHighestId.getPowerplantID() + 1;
     }
 
     public void updateCantonTable() {
