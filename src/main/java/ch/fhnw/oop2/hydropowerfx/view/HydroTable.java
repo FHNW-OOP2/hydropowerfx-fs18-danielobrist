@@ -9,7 +9,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 
+import javax.lang.model.type.DeclaredType;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.spi.NumberFormatProvider;
+import java.time.format.DecimalStyle;
 import java.util.Locale;
 
 public class HydroTable extends VBox implements ViewMixin {
@@ -46,7 +50,7 @@ public class HydroTable extends VBox implements ViewMixin {
 
         TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme");
         startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
-        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter("####")));
 
         TableColumn<PowerplantsPM, Number> maxpowerCol = new TableColumn<>("Leistung (MW)");
         maxpowerCol.setCellValueFactory(cell -> cell.getValue().powerplantMaxPowerProperty());

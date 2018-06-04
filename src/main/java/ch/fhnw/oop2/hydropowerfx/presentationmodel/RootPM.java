@@ -48,9 +48,8 @@ public class RootPM {
                 }
 
         );
-        hydroProxy.powerplantMaxPowerProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(() -> updateCantonTable()));
-        hydroProxy.powerplantCantonProperty().addListener((observable, oldValue, newValue) -> Platform.runLater(() -> updateCantonTable()));
-
+        hydroProxy.powerplantMaxPowerProperty().addListener((observable) -> Platform.runLater(() -> updateCantonTable()));
+        hydroProxy.powerplantCantonProperty().addListener((observable) -> Platform.runLater(() -> updateCantonTable()));
 
     }
 
@@ -103,9 +102,7 @@ public class RootPM {
     public void search(String searchtext) {
         String searchTextSmall = searchtext.toLowerCase();
         allPowerplants.stream().filter(item -> item.getName().toLowerCase() == searchTextSmall).findAny()
-                .ifPresent(item -> {
-                    setSelectedPowerplantId(item.getPowerplantID());
-                });
+                .ifPresent(item -> setSelectedPowerplantId(item.getPowerplantID()));
     }
 
     //kraftwerke pro kanton zählen

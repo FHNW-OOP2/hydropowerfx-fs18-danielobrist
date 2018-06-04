@@ -64,17 +64,22 @@ public class HydroHeader extends HBox implements ViewMixin {
         deleteButton.setOnAction(event -> root.delete());
         deleteButton.setFocusTraversable(false);
 
-        searchField.setOnKeyReleased(event -> root.search(searchField.getText()));
+        searchField.setOnKeyReleased(event -> root.search(getSearchString()));
     }
 
     @Override
     public void setupBindings() {
-        PowerplantsPM proxy = root.getHydroProxy();
-
 
     }
+    public void setupValueChangedListeners() {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != oldValue) {
+                root.search(getSearchString());
+            }
+        });
+    }
 
-    public String getSearchString() {
+        public String getSearchString() {
         return searchField.getText();
     }
 
