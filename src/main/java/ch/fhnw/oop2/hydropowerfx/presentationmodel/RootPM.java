@@ -30,6 +30,9 @@ public class RootPM {
 
     private final PowerplantsPM hydroProxy = new PowerplantsPM();
 
+    private final BooleanProperty focusLatitude = new SimpleBooleanProperty();
+    private final BooleanProperty focusLongitude = new SimpleBooleanProperty();
+
     public RootPM() {
         allPowerplants.addAll(readFromFile());
         allCantons.addAll(readFromCantonFile());
@@ -253,5 +256,30 @@ public class RootPM {
     public void setSelectedPowerplantId(int selectedPowerplantId) {
         this.selectedPowerplantId.set(selectedPowerplantId);
     }
+    public boolean isFocusLatitude() {
+        return focusLatitude.get();
+    }
+
+    public BooleanProperty focusLatitudeProperty() {
+        return focusLatitude;
+    }
+
+    public void setFocusLatitude(boolean focusLatitude) {
+        this.focusLatitude.set(focusLatitude);
+    }
+
+    public boolean getFocusLongitude() {
+        return focusLongitude.get();
+    }
+
+    public BooleanProperty focusLongitudeProperty() {
+        return focusLongitude;
+    }
+
+    public void setFocusLongitude(boolean focusLongitude) {
+        this.focusLongitude.set(focusLongitude);
+    }
+
+
 
 }

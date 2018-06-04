@@ -57,6 +57,8 @@ public class HydroForm extends GridPane implements ViewMixin {
     private TextField imageField;
 
     private WaterTankControl watertankcontrol;
+    private HydroPower hydropower;
+    private SwissLocationControl swisslocation;
 
     public HydroForm(RootPM root) {
         this.root = root;
@@ -119,6 +121,8 @@ public class HydroForm extends GridPane implements ViewMixin {
         imageField = new TextField();
 
         watertankcontrol = new WaterTankControl(root);
+        hydropower = new HydroPower();
+        swisslocation = new SwissLocationControl();
     }
 
     @Override
@@ -132,7 +136,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         getRowConstraints().addAll(gc, gc, gc, gc, gc, gc, gc, gc);
 
         add(nameIndex, 0, 0, 2, 1);
-        add(siteCantonIndex, 0, 1);
+        add(swisslocation, 0, 1);
         add(maxPowerIndex, 0, 2);
         add(operationstartFirstIndex, 0, 3);
 
@@ -164,6 +168,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(imageField, 0, 18, 2, 1);
 
         add(watertankcontrol, 1, 3);
+        add(hydropower, 0,4);
     }
 
     @Override
@@ -195,6 +200,14 @@ public class HydroForm extends GridPane implements ViewMixin {
         statusField.textProperty().bindBidirectional(proxy.powerplantStatusProperty());
         waterbodiesField.textProperty().bindBidirectional(proxy.powerplantWaterbodiesProperty());
         imageField.textProperty().bindBidirectional(proxy.powerplantImageURLProperty());
+
+        hydropower.currentValueProperty().bind(proxy.powerplantMaxPowerProperty());
+
+        swisslocation.latitudeProperty().bindBidirectional(root.getHydroProxy().powerplantLatitudeProperty());
+        swisslocation.longitudeProperty().bindBidirectional(root.getHydroProxy().powerplantLongitudeProperty());
+        swisslocation.kantonProperty().bindBidirectional(root.getHydroProxy().powerplantCantonProperty());
+        swisslocation.latitudeFocusProperty().bind(root.focusLatitudeProperty());
+        swisslocation.longitudeFocusProperty().bind(root.focusLongitudeProperty());
 
     }
 

@@ -1,11 +1,6 @@
 package ch.fhnw.oop2.hydropowerfx.presentationmodel;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 
 public class PowerplantsPM {
@@ -23,6 +18,8 @@ public class PowerplantsPM {
     private final StringProperty powerplantStatus = new SimpleStringProperty();
     private final StringProperty powerplantWaterbodies = new SimpleStringProperty();
     private final StringProperty powerplantImageURL = new SimpleStringProperty();
+
+
 
 
     public PowerplantsPM() {
@@ -254,4 +251,6 @@ public class PowerplantsPM {
     public void setPowerplantMaxPower(double powerplantMaxPower) {
         this.powerplantMaxPower.set(powerplantMaxPower);
     }
+
+
 }
