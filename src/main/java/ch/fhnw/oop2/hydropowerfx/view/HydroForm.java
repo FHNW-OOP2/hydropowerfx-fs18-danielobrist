@@ -56,6 +56,8 @@ public class HydroForm extends GridPane implements ViewMixin {
     private Label imageLabel;
     private TextField imageField;
 
+    private WaterTankControl watertankcontrol;
+
     public HydroForm(RootPM root) {
         this.root = root;
         init();
@@ -115,6 +117,8 @@ public class HydroForm extends GridPane implements ViewMixin {
 
         imageLabel = new Label("Bild-URL");
         imageField = new TextField();
+
+        watertankcontrol = new WaterTankControl(root);
     }
 
     @Override
@@ -158,6 +162,8 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(waterbodiesField, 1, 16);
         add(imageLabel, 0, 17);
         add(imageField, 0, 18, 2, 1);
+
+        add(watertankcontrol, 1, 3);
     }
 
     @Override

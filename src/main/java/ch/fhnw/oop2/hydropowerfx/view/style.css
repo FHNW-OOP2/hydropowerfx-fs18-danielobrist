@@ -82,3 +82,206 @@
     -fx-border-color: transparent;
     -fx-border-width: 1;
 }
+Editor {
+    /*-fx-min-width:      485px;*/
+    -fx-pref-width:     685px;
+    /*-fx-max-width:      685px;*/
+    /*-fx-min-height:     350px;*/
+    -fx-pref-height:    270px;
+    /*-fx-max-height:     350px;*/
+    -fx-padding: 5px;
+
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-border: 10px;
+    -fx-spacing: 5px;
+}
+
+Footer {
+    /*-fx-min-width:      100px;*/
+    -fx-pref-width:     1160px;
+    /*-fx-max-width:      300px;*/
+    /*-fx-min-height:     100px;*/
+    -fx-pref-height:    150px;
+    /*-fx-max-height:     300px;*/
+    -fx-padding: 5px;
+}
+
+Header {
+    /*-fx-min-width:      485px;*/
+    -fx-pref-width:     685px;
+    /*-fx-max-width:      685px;*/
+    /*-fx-min-height:     100px;*/
+    -fx-pref-height:    280px;
+    /*-fx-max-height:     300px;*/
+    -fx-padding: 5px;
+}
+
+Overview {
+    /*-fx-min-width:      265px;*/
+    -fx-pref-width:     415px;
+    -fx-max-width:      415px;
+    /*-fx-min-height:     100px;*/
+    -fx-pref-height:    600px;
+    /*-fx-max-height:     300px;*/
+    -fx-padding: 5px;
+}
+
+Toolbar {
+    /*-fx-min-width:      100px;*/
+    -fx-pref-width:     1160px;
+    /*-fx-max-width:      300px;*/
+    /*-fx-min-height:     100px;*/
+    -fx-pref-height:    10px;
+    /*-fx-max-height:     300px;*/
+    -fx-padding: 5px;
+    -fx-background-color: #2E64FE;
+}
+
+VBox {
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-border: 10px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 10px;
+    -fx-vertical-grid-lines-visible: 20px;
+    -fx-spacing: 20px;
+
+    -fx-vgap: 50px;
+}
+
+SplitPane {
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-border: 10px;
+    -fx-spacing: 5px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 10px;
+
+    -fx-vgap: 50px;
+}
+
+ScrollPane {
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-border: 10px;
+    -fx-spacing: 5px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 10px;
+
+    -fx-vgap: 50px;
+}
+
+.button {
+    -fx-padding: 8px 15px;
+    -fx-margin: 15px;
+    -fx-margin-right: 30px;
+    -fx-border: 20px;
+    -fx-background-color: #2E64FE;
+}
+
+.label {
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-border: 10px;
+    -fx-spacing: 5px;
+}
+
+.text-field {
+    -fx-padding: 5px;
+    -fx-margin: 50px;
+    -fx-border: 10px;
+    -fx-spacing: 50px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 10px;
+}
+
+#save {
+    -fx-background-image: url("/data/Java-Logo-klein.PNG");
+    -fx-background-size: 30px 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 2.5px;
+}
+
+.nameLabel{
+    -fx-font-size: 26 !important;
+}
+
+Header Label{
+    -fx-font-size: 20;
+    -fx-text-fill: grey;
+}
+
+
+/*  WaterTank Style */
+
+.watertank-control {
+    -fx-padding: 5;
+    -fx-background-color: transparent;
+    -base-color: rgb(2, 138, 204);
+}
+
+.watertank-control .background-circle {
+    -fx-fill: -base-color;
+}
+
+.watertank-control .display {
+    -fx-font-family: 'Lato Light';
+    -fx-font-size: 14;
+    -fx-fill: derive(-base-color, 90%);
+}
+
+.tank{
+
+    -fx-fill: lightgrey;
+
+
+}
+
+.watertank-control .display {
+    -fx-font-family: 'Lato Light';
+    -fx-font-size: 14;
+    -fx-font-color: green;
+    -fx-fill: derive(white, 95%);
+}
+
+
+
+.water{
+    -fx-position: absolute;
+    -fx-top: 50%;
+    -fx-left: 50%;
+    -fx-width: 240px;
+    -fx-height: 350px;
+    -fx-border: 6px;
+    -fx-border-style:solid;
+    -fx-border-color: white;
+    -fx-border-top: 6px;
+    -fx-border-style-top:solid;
+    -fx-border-color-top: transparent;
+    -fx-border-radius : 10px;
+    -fx-border-top-left-radius: 5px;
+    -fx-border-top-right-radius: 5px;
+    -fx-fill: url('../resources/image/Water.gif');
+    -fx-background-position: 0px 350px;
+    -fx-background-repeat: repeat-y;
+    fx-background-border: transparent;
+    -fx-animation: anim 20s ease-in-out infinite;
+}
+
+@keyframes anim{
+
+
+    20% {
+        -fx-background-position: 3000px 0px;
+    }
+
+    100% {
+        -fx-background-position: 6000px 350px;
+    }
+
+
+}
