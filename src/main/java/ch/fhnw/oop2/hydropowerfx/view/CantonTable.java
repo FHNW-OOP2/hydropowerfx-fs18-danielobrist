@@ -6,10 +6,11 @@ import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import javafx.collections.ListChangeListener;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class CantonTable extends VBox implements ViewMixin {
+public class CantonTable extends HBox implements ViewMixin {
 
     private final RootPM root;
 
@@ -33,7 +34,8 @@ public class CantonTable extends VBox implements ViewMixin {
 
     @Override
     public void layoutControls() {
-
+        setPrefHeight(300);
+        setHgrow(table, Priority.ALWAYS);
         getChildren().addAll(table);
     }
 
@@ -46,8 +48,12 @@ public class CantonTable extends VBox implements ViewMixin {
         TableColumn<CantonPM, Number> sumOfpowerplantsCol = new TableColumn<>("Anzahl Kraftwerke");
         sumOfpowerplantsCol.setCellValueFactory(cell -> cell.getValue().hydropowersPerCantonProperty());
 
-        TableColumn<CantonPM, Number> sumOfpowerCol = new TableColumn<>("Gesamtleistung");
+        TableColumn<CantonPM, Number> sumOfpowerCol = new TableColumn<>("Gesamtleistung (MW)");
         sumOfpowerCol.setCellValueFactory(cell -> cell.getValue().powerPerCantonProperty());
+
+        nameCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.4));
+        sumOfpowerCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.3));
+        sumOfpowerplantsCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.3));
 
         tableView.getColumns().addAll(nameCol, sumOfpowerplantsCol, sumOfpowerCol);
 

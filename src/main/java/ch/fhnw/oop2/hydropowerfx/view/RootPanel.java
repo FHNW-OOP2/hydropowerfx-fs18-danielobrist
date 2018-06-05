@@ -17,8 +17,8 @@ public class RootPanel extends BorderPane implements ViewMixin {
     private final SplitPane splitpane;
 
     public RootPanel(RootPM model) {
-        this.model = model;
         this.splitpane = new SplitPane();
+        this.model = model;
         init();
     }
 
@@ -35,21 +35,21 @@ public class RootPanel extends BorderPane implements ViewMixin {
         table = new HydroTable(model);
         header = new HydroHeader(model);
 
+
     }
 
     @Override
     public void layoutControls() {
-
-        setBottom(cantons);
-
-        setTop(header);
         setCenter(splitpane);
-
         splitpane.getItems().add(0, table);
         splitpane.getItems().add(1, form);
         Platform.runLater(() -> {
             splitpane.setDividerPosition(0, 0.37);
         });
+        setBottom(cantons);
+        setTop(header);
+
+
 
     }
 

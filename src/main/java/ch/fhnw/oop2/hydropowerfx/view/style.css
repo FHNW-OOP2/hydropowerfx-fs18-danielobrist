@@ -4,23 +4,17 @@
 
 .header {
     -fx-font-size: 10;
-    -fx-background-color: #f6f6f6;
+    -fx-background-color: #f4f4f4;
     -fx-padding: 5 15 5 15;
     -fx-spacing: 10;
 }
 
 .form {
-    -fx-background-color: #f6f6f6;
-    -fx-padding: 10 10 10 10;
-    -fx-hgap: 5;
-    -fx-vgap: 5;
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 8 8 8 8;
+    -fx-hgap: 4;
+    -fx-vgap: 4;
 
-}
-
-.cantons {
-    -fx-font-size: 30;
-    -fx-padding: 40 20 30 20;
-    -fx-spacing: 20;
 }
 
 .label {

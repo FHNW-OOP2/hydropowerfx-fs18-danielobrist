@@ -1,7 +1,5 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
-import java.awt.GradientPaint;
-
 import javafx.beans.property.DoubleProperty;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -16,20 +14,15 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Paint;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.transform.Rotate;
 
 /**
  * @author Bastady C�line
  */
-public class HydroPower extends Region {
+public class PowerControl extends Region {
 
 
     /**
@@ -72,7 +65,7 @@ public class HydroPower extends Region {
         return (PREFERRED_SIZE / ARTBOARD_SIZE);
     }
 
-    public HydroPower() {
+    public PowerControl() {
         initializeSizes();
         initializeSelf();
         initializeParts();
@@ -131,8 +124,8 @@ public class HydroPower extends Region {
         Arc arc = new Arc();
         arc.setCenterX(cx);
         arc.setCenterY(cy);
-        arc.setRadiusX(radius2 * HydroPower.sizeFactor());
-        arc.setRadiusY(radius2 * HydroPower.sizeFactor());
+        arc.setRadiusX(radius2 * PowerControl.sizeFactor());
+        arc.setRadiusY(radius2 * PowerControl.sizeFactor());
         arc.setStartAngle(startAngle);
         arc.setLength(length);
         arc.setFill(color);

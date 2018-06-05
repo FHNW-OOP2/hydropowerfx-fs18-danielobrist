@@ -4,9 +4,9 @@
  - Daniel Obrist
  
 ## CUIE Integration von
- - Céline Albrecher & Norina Stiner - Watertank
- - Bastady Céline - Powerdisplay
- - Benjamin Denzler & Dario Lohmüller - Map
+ - Céline Albrecher & Norina Steiner - WatertankControl
+ - Céline Bastady - Powercontrol
+ - Benjamin Denzler & Dario Lohmüller - SwissLocationControl
 
 ## Abgabe
 - Mittwoch, 6.6.2018, 18:00 Uhr

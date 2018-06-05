@@ -48,6 +48,10 @@ public class HydroTable extends VBox implements ViewMixin {
         nameCol.setCellValueFactory(cell -> cell.getValue().powerplantNameProperty());
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn()); //makes cells editable (ENTER saves Value in Table)
 
+        // TableColumn<PowerplantsPM, String> wappenCol = new TableColumn<>();
+        // wappenCol.setCellValueFactory(cell -> new CantonTableCell().updateItem(cell.getValue().powerplantCantonProperty().toString(), false));
+
+
         TableColumn<PowerplantsPM, Number> startCol = new TableColumn<>("Inbetriebnahme");
         startCol.setCellValueFactory(cell -> cell.getValue().powerplantStartFirstProperty());
         startCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter("####")));
@@ -59,6 +63,10 @@ public class HydroTable extends VBox implements ViewMixin {
 
         tableView.getColumns().addAll(nameCol, maxpowerCol, startCol);
 
+        nameCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.4));
+        maxpowerCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.3));
+        startCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.3));
+
         return tableView;
     }
 
@@ -66,14 +74,14 @@ public class HydroTable extends VBox implements ViewMixin {
     public void layoutControls() {
         setVgrow(tabelle, Priority.ALWAYS);
 
-        getChildren().addAll(tabelle);
 
+
+        getChildren().addAll(tabelle);
 
     }
 
     @Override
     public void setupBindings() {
-
     }
 
     @Override

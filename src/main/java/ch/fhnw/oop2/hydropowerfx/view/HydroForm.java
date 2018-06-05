@@ -5,6 +5,8 @@ import java.util.Locale;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.PowerplantsPM;
 
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -57,7 +59,7 @@ public class HydroForm extends GridPane implements ViewMixin {
     private TextField imageField;
 
     private WaterTankControl watertankcontrol;
-    private HydroPower hydropower;
+    private PowerControl hydropower;
     private SwissLocationControl swisslocation;
 
     public HydroForm(RootPM root) {
@@ -122,7 +124,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         imageField = new TextField();
 
         watertankcontrol = new WaterTankControl(root);
-        hydropower = new HydroPower();
+        hydropower = new PowerControl();
         swisslocation = new SwissLocationControl();
     }
 
@@ -148,6 +150,8 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(swisslocation, 0, 2);
         add(watertankcontrol, 2, 2);
         add(hydropower,1,2);
+        setHalignment(hydropower, HPos.CENTER);
+        setValignment(hydropower, VPos.CENTER);
 
         add(nameLabel, 0, 3);
         add(nameField, 0, 4);
@@ -178,7 +182,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(waterbodiesField, 2, 10);
 
         add(imageLabel, 0, 11);
-        add(imageField, 0, 12, 2, 1);
+        add(imageField, 0, 12, 3, 1);
 
 
     }
@@ -198,7 +202,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         cantonIndex.textProperty().bind(proxy.powerplantCantonProperty());
         operationstartFirstIndex.textProperty().bind(proxy.powerplantStartFirstProperty().asString());
         siteCantonIndex.textProperty().bind(proxy.powerplantSiteProperty().concat(", ").concat(proxy.powerplantCantonProperty()));
-        maxWaterIndex.textProperty().bind(proxy.powerplantMaxVolumeProperty().asString("%.2f M3"));
+        maxWaterIndex.textProperty().bind(proxy.powerplantMaxVolumeProperty().asString("%.2f m\u00B3"));
 
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());
         cantonField.textProperty().bindBidirectional(proxy.powerplantCantonProperty());
