@@ -73,9 +73,7 @@ public class HydroTable extends VBox implements ViewMixin {
     @Override
     public void layoutControls() {
         setVgrow(tabelle, Priority.ALWAYS);
-
-
-
+        setMinHeight(300);
         getChildren().addAll(tabelle);
 
     }

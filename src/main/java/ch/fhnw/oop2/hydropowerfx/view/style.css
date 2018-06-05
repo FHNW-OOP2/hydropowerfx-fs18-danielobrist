@@ -51,106 +51,29 @@
     -fx-text-fill: white;
 }
 
-.table-view, .tree-table-view {
+.table, .table-view, .tree-table-view {
     /* Constants used throughout the tableview. */
     -fx-table-header-border-color: transparent;
     -fx-table-cell-border-color: -fx-box-border; /* Horizontal Lines*/
     -fx-background-color: transparent;
 }
 
-.table-view .show-hide-columns-button, .tree-table-view .show-hide-columns-button {
+.table .column-header-background .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.table, .table-view .show-hide-columns-button, .tree-table-view .show-hide-columns-button {
     -fx-background-color: transparent;
 }
 
-.table-view .column-header .label, .table-view .filler .label,
-.table-view .column-drag-header .label, .tree-table-view .column-header .label,
-.tree-table-view .filler .label, .tree-table-view .column-drag-header .label {
-    -fx-alignment: CENTER_LEFT;
-}
 
-.table-view .column-header-background, .tree-table-view .column-header-background {
-    -fx-background-color: transparent;
-}
+
 
 .table-cell {
     -fx-border-color: transparent;
     -fx-border-width: 1;
 }
-
-Header {
-    /*-fx-min-width:      485px;*/
-    -fx-pref-width:     685px;
-    /*-fx-max-width:      685px;*/
-    /*-fx-min-height:     100px;*/
-    -fx-pref-height:    280px;
-    /*-fx-max-height:     300px;*/
-    -fx-padding: 5px;
-}
-
-Overview {
-    /*-fx-min-width:      265px;*/
-    -fx-pref-width:     415px;
-    -fx-max-width:      415px;
-    /*-fx-min-height:     100px;*/
-    -fx-pref-height:    600px;
-    /*-fx-max-height:     300px;*/
-    -fx-padding: 5px;
-}
-
-Toolbar {
-    /*-fx-min-width:      100px;*/
-    -fx-pref-width:     1160px;
-    /*-fx-max-width:      300px;*/
-    /*-fx-min-height:     100px;*/
-    -fx-pref-height:    10px;
-    /*-fx-max-height:     300px;*/
-    -fx-padding: 5px;
-    -fx-background-color: #2E64FE;
-}
-
-VBox {
-    -fx-padding: 5px;
-    -fx-margin: 5px;
-    -fx-border: 10px;
-    -fx-spacing: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 10px;
-    -fx-vertical-grid-lines-visible: 20px;
-    -fx-spacing: 20px;
-
-    -fx-vgap: 50px;
-}
-
-SplitPane {
-    -fx-padding: 5px;
-    -fx-margin: 5px;
-    -fx-border: 10px;
-    -fx-spacing: 5px;
-    -fx-spacing: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 10px;
-
-    -fx-vgap: 50px;
-}
-
-ScrollPane {
-    -fx-padding: 5px;
-    -fx-margin: 5px;
-    -fx-border: 10px;
-    -fx-spacing: 5px;
-    -fx-spacing: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 10px;
-
-    -fx-vgap: 50px;
-}
-
-
-
-
-
-
-
 
 
 /*  WaterTank Style */

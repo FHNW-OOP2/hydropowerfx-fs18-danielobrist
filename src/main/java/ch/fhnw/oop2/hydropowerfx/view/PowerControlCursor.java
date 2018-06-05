@@ -9,14 +9,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 
-public class Cursor {
+public class PowerControlCursor {
 
 	Circle circle;
 	//Polygon peak;
 	Circle peak;
 	Line body;
 	
-	public Cursor(double cx, double cy, double radius,double value,double sizeFactor) {
+	public PowerControlCursor(double cx, double cy, double radius, double value, double sizeFactor) {
 
 		//Shadow & Effects
 	    DropShadow MY_SHADOW = new DropShadow(BlurType.GAUSSIAN,Color.color(0, 0, 0, 0.25), 10d * (sizeFactor),0,4,4);

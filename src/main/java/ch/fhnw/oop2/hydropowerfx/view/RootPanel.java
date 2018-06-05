@@ -5,16 +5,17 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
+import javafx.stage.Stage;
 
 
 public class RootPanel extends BorderPane implements ViewMixin {
     private final RootPM model;
 
-    private CantonTable cantons;
     private HydroForm form;
     private HydroTable table;
     private HydroHeader header;
     private final SplitPane splitpane;
+    private CantonTable cantons;
 
     public RootPanel(RootPM model) {
         this.splitpane = new SplitPane();
@@ -30,27 +31,31 @@ public class RootPanel extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeControls() {
-        cantons = new CantonTable(model);
+
+
         form = new HydroForm(model);
         table = new HydroTable(model);
         header = new HydroHeader(model);
-
+        cantons = new CantonTable(model);
 
     }
 
     @Override
     public void layoutControls() {
+        setBottom(cantons);
         setCenter(splitpane);
         splitpane.getItems().add(0, table);
         splitpane.getItems().add(1, form);
         Platform.runLater(() -> {
-            splitpane.setDividerPosition(0, 0.37);
+            splitpane.setDividerPosition(0, 0.4);
         });
-        setBottom(cantons);
+
         setTop(header);
 
 
 
     }
+
+
 
 }

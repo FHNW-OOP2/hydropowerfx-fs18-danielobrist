@@ -77,10 +77,13 @@ public class HydroForm extends GridPane implements ViewMixin {
         idIndex = new Label();
         nameIndex = new Label();
         nameIndex.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
+        operationstartFirstIndex = new Label();
+        operationstartFirstIndex.setFont(Font.font("Helvetica", FontWeight.MEDIUM, 20));
+
         maxPowerIndex = new Label();
         maxWaterIndex = new Label();
         siteIndex = new Label();
-        operationstartFirstIndex = new Label();
+
         cantonIndex = new Label();
         siteCantonIndex = new Label();
 
@@ -124,21 +127,29 @@ public class HydroForm extends GridPane implements ViewMixin {
         imageField = new TextField();
 
         watertankcontrol = new WaterTankControl(root);
+
         hydropower = new PowerControl();
         swisslocation = new SwissLocationControl();
     }
 
     @Override
     public void layoutControls() {
-        ColumnConstraints cc = new ColumnConstraints();
+        setMinHeight(340);
+        ColumnConstraints c1 = new ColumnConstraints();
+        ColumnConstraints c2 = new ColumnConstraints();
+        ColumnConstraints c3 = new ColumnConstraints();
 
-        cc.setHgrow(Priority.ALWAYS);
+        c1.setHgrow(Priority.ALWAYS);
+        getColumnConstraints().addAll(c1, c2, c3);
 
-        getColumnConstraints().addAll(cc, cc, cc);
+        c1.prefWidthProperty().bind(widthProperty().multiply(0.5));
+        c2.prefWidthProperty().bind(widthProperty().multiply(0.25));
+        c3.prefWidthProperty().bind(widthProperty().multiply(0.25));
+
 
         RowConstraints gc = new RowConstraints();
         gc.setVgrow(Priority.ALWAYS);
-        getRowConstraints().addAll(gc, gc, gc, gc, gc, gc, gc, gc);
+        getRowConstraints().addAll(gc, gc, gc, gc, gc, gc, gc, gc, gc, gc, gc, gc);
 
         add(nameIndex, 0, 0, 2, 1);
         add(operationstartFirstIndex, 2, 0);
@@ -150,8 +161,6 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(swisslocation, 0, 2);
         add(watertankcontrol, 2, 2);
         add(hydropower,1,2);
-        setHalignment(hydropower, HPos.CENTER);
-        setValignment(hydropower, VPos.CENTER);
 
         add(nameLabel, 0, 3);
         add(nameField, 0, 4);

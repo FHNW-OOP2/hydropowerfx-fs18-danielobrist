@@ -16,10 +16,13 @@ public class HydroPowerApp extends Application {
         RootPM model = new RootPM();
         Parent rootPanel = new RootPanel(model);
 
+
         Scene scene = new Scene(rootPanel);
 
         primaryStage.titleProperty().bind(model.applicationTitleProperty());
         primaryStage.setScene(scene);
+
+
         primaryStage.setResizable(true);
         primaryStage.setWidth(1200);
 

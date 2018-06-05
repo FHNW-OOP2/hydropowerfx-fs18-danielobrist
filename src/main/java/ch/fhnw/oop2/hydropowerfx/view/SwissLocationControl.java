@@ -59,7 +59,7 @@ public class SwissLocationControl extends Region {
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
-    private static final double MINIMUM_WIDTH  = 250;
+    private static final double MINIMUM_WIDTH  = 150;
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
 
     private static final double MAXIMUM_WIDTH = 1000;

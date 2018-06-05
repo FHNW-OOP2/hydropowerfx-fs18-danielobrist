@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class CantonTable extends HBox implements ViewMixin {
+public class CantonTable extends VBox implements ViewMixin {
 
     private final RootPM root;
 
@@ -29,13 +29,13 @@ public class CantonTable extends HBox implements ViewMixin {
     @Override
     public void initializeControls() {
         table = initializeTable();
-        table.setMaxHeight(190);
+        table.setPrefHeight(150);
+        table.setMinHeight(80);
     }
 
     @Override
     public void layoutControls() {
-        setPrefHeight(300);
-        setHgrow(table, Priority.ALWAYS);
+        setVgrow(table, Priority.ALWAYS);
         getChildren().addAll(table);
     }
 

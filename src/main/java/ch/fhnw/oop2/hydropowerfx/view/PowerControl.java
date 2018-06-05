@@ -18,6 +18,9 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 /**
  * @author Bastady C�line
@@ -44,7 +47,10 @@ public class PowerControl extends Region {
     private Arc orangeZone;
     private Arc yellowZone;
     private Arc greenZone;
-    private Cursor cursor;
+    private PowerControlCursor powerControlCursor;
+    private Text     valueDisplay;
+    private Text label;
+    private Rectangle rectangle;
 
 
     //all properties
@@ -140,7 +146,7 @@ public class PowerControl extends Region {
 
         //Eigenschaften von FIGMA , redundanz vermeiden
         cx = 100 * sizeFactor();
-        cy = 100 * sizeFactor();
+        cy = 170 * sizeFactor();
 
 
         //aiguille
@@ -169,8 +175,7 @@ public class PowerControl extends Region {
     }
 
     private void layoutParts() {
-        drawingPane.getChildren().addAll(arc, cursor.getElements(), redZone, orangeZone, yellowZone, greenZone);
-
+        drawingPane.getChildren().addAll(arc,powerControlCursor.getElements(),redZone, orangeZone,yellowZone,greenZone);
         drawingPane.getChildren().add(createTicks(cx, cy, 21, 180, radius / 15, 5, 90, "")); //Intervall, Anzahl Ticks
         //drawingPane.getChildren().add(createTicks(cx, cy, 19,180, radius/15, 5, 90, ""));
         getChildren().add(drawingPane);
@@ -189,19 +194,19 @@ public class PowerControl extends Region {
 
 
     private void updateCursor() {
-        cursor = new Cursor(cx, cy, radius * sizeFactor(), getCurrentValue(), sizeFactor());
+        powerControlCursor = new PowerControlCursor(cx, cy, radius * sizeFactor(), getCurrentValue(), sizeFactor());
 
     }
 
     private void setupValueChangeListener() {
         currentValue.addListener((observable, oldValue, newValue) -> {
                     double state = (double) newValue;
-                    if (state <= 900 && state >= 0) {
+                    if (state <= 300 && state >= 0) {
 
-                        drawingPane.getChildren().remove(cursor.getElements());
+                        drawingPane.getChildren().remove(powerControlCursor.getElements());
                         updateCursor();
 
-                        drawingPane.getChildren().add(cursor.getElements());
+                        drawingPane.getChildren().add(powerControlCursor.getElements());
 
                     }
                 }
@@ -209,7 +214,6 @@ public class PowerControl extends Region {
     }
 
     private void setupBinding() {
-
     }
 
 
