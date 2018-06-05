@@ -27,7 +27,7 @@ public class HydroForm extends GridPane implements ViewMixin {
     private Label operationstartFirstIndex;
     private Label cantonIndex;
     private Label siteCantonIndex;
-
+    private Label maxWaterIndex;
 
     private Label nameLabel;
     private TextField nameField;
@@ -76,6 +76,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         nameIndex = new Label();
         nameIndex.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
         maxPowerIndex = new Label();
+        maxWaterIndex = new Label();
         siteIndex = new Label();
         operationstartFirstIndex = new Label();
         cantonIndex = new Label();
@@ -128,47 +129,58 @@ public class HydroForm extends GridPane implements ViewMixin {
     @Override
     public void layoutControls() {
         ColumnConstraints cc = new ColumnConstraints();
+
         cc.setHgrow(Priority.ALWAYS);
-        getColumnConstraints().addAll(cc, cc);
+
+        getColumnConstraints().addAll(cc, cc, cc);
 
         RowConstraints gc = new RowConstraints();
         gc.setVgrow(Priority.ALWAYS);
         getRowConstraints().addAll(gc, gc, gc, gc, gc, gc, gc, gc);
 
         add(nameIndex, 0, 0, 2, 1);
-        add(swisslocation, 0, 1);
-        add(maxPowerIndex, 0, 2);
-        add(operationstartFirstIndex, 0, 3);
+        add(operationstartFirstIndex, 2, 0);
 
-        add(nameLabel, 0, 5);
-        add(nameField, 0, 6);
-        add(cantonLabel, 1, 5);
-        add(cantonField, 1, 6);
-        add(typeLabel, 0, 7);
-        add(typeField, 0, 8);
-        add(siteLabel, 1, 7);
-        add(siteField, 1, 8);
-        add(maxWaterLabel, 0, 9);
-        add(maxWaterField, 0, 10);
-        add(maxPowerLabel, 1, 9);
-        add(maxPowerField, 1, 10);
-        add(startFirstLabel, 0, 11);
-        add(startFirstField, 0, 12);
-        add(startLastLabel, 1, 11);
-        add(startLastField, 1, 12);
-        add(latitudeLabel, 0, 13);
-        add(latitudeField, 0, 14);
-        add(longitudeLabel, 1, 13);
-        add(longitudeField, 1, 14);
-        add(statusLabel, 0, 15);
-        add(statusField, 0, 16);
-        add(waterbodiesLabel, 1, 15);
-        add(waterbodiesField, 1, 16);
-        add(imageLabel, 0, 17);
-        add(imageField, 0, 18, 2, 1);
+        add(siteCantonIndex, 0,1);
+        add(maxPowerIndex, 1, 1);
+        add(maxWaterIndex, 2, 1);
 
-        add(watertankcontrol, 1, 3);
-        add(hydropower, 0,4);
+        add(swisslocation, 0, 2);
+        add(watertankcontrol, 2, 2);
+        add(hydropower,1,2);
+
+        add(nameLabel, 0, 3);
+        add(nameField, 0, 4);
+        add(siteLabel, 1, 3);
+        add(siteField, 1, 4);
+        add(cantonLabel, 2, 3);
+        add(cantonField, 2, 4);
+
+        add(typeLabel, 0, 5);
+        add(typeField, 0, 6);
+        add(maxPowerLabel, 1, 5);
+        add(maxPowerField, 1, 6);
+        add(maxWaterLabel, 2, 5);
+        add(maxWaterField, 2, 6);
+
+        add(startFirstLabel, 0, 7);
+        add(startFirstField, 0, 8);
+        add(startLastLabel, 1, 7);
+        add(startLastField, 1, 8);
+        add(statusLabel, 2, 7);
+        add(statusField, 2, 8);
+
+        add(latitudeLabel, 0, 9);
+        add(latitudeField, 0, 10);
+        add(longitudeLabel, 1, 9);
+        add(longitudeField, 1, 10);
+        add(waterbodiesLabel, 2, 9);
+        add(waterbodiesField, 2, 10);
+
+        add(imageLabel, 0, 11);
+        add(imageField, 0, 12, 2, 1);
+
+
     }
 
     @Override
@@ -186,6 +198,7 @@ public class HydroForm extends GridPane implements ViewMixin {
         cantonIndex.textProperty().bind(proxy.powerplantCantonProperty());
         operationstartFirstIndex.textProperty().bind(proxy.powerplantStartFirstProperty().asString());
         siteCantonIndex.textProperty().bind(proxy.powerplantSiteProperty().concat(", ").concat(proxy.powerplantCantonProperty()));
+        maxWaterIndex.textProperty().bind(proxy.powerplantMaxVolumeProperty().asString("%.2f M3"));
 
         nameField.textProperty().bindBidirectional(proxy.powerplantNameProperty());
         cantonField.textProperty().bindBidirectional(proxy.powerplantCantonProperty());

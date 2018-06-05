@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.hydropowerfx.view;
 
+import javafx.application.Platform;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
@@ -46,5 +47,10 @@ public class RootPanel extends BorderPane implements ViewMixin {
 
         splitpane.getItems().add(0, table);
         splitpane.getItems().add(1, form);
+        Platform.runLater(() -> {
+            splitpane.setDividerPosition(0, 0.37);
+        });
+
     }
+
 }

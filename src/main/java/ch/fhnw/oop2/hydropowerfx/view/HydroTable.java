@@ -68,6 +68,7 @@ public class HydroTable extends VBox implements ViewMixin {
 
         getChildren().addAll(tabelle);
 
+
     }
 
     @Override

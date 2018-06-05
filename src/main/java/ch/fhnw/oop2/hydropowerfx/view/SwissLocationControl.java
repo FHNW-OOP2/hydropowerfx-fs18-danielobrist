@@ -59,7 +59,7 @@ public class SwissLocationControl extends Region {
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
-    private static final double MINIMUM_WIDTH  = 300;
+    private static final double MINIMUM_WIDTH  = 250;
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
 
     private static final double MAXIMUM_WIDTH = 1000;
@@ -182,7 +182,7 @@ public class SwissLocationControl extends Region {
         offsetX = map.localToParent(map.getLayoutBounds()).getMinX()-(locationMarker.getFitWidth()/2);
         offsetY = map.localToParent(map.getLayoutBounds()).getMinY()-locationMarker.getFitHeight();
 
-        drawingPane.getChildren().addAll(map, locationMarker, opacityRectangle, longitudeLabel, latitudeLabel, kantonLabel, coatOfArms);
+        drawingPane.getChildren().addAll(map, locationMarker, opacityRectangle, coatOfArms);
         getChildren().add(drawingPane);
     }
 

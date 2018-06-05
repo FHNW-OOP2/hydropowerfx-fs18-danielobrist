@@ -82,30 +82,6 @@
     -fx-border-color: transparent;
     -fx-border-width: 1;
 }
-Editor {
-    /*-fx-min-width:      485px;*/
-    -fx-pref-width:     685px;
-    /*-fx-max-width:      685px;*/
-    /*-fx-min-height:     350px;*/
-    -fx-pref-height:    270px;
-    /*-fx-max-height:     350px;*/
-    -fx-padding: 5px;
-
-    -fx-padding: 5px;
-    -fx-margin: 5px;
-    -fx-border: 10px;
-    -fx-spacing: 5px;
-}
-
-Footer {
-    /*-fx-min-width:      100px;*/
-    -fx-pref-width:     1160px;
-    /*-fx-max-width:      300px;*/
-    /*-fx-min-height:     100px;*/
-    -fx-pref-height:    150px;
-    /*-fx-max-height:     300px;*/
-    -fx-padding: 5px;
-}
 
 Header {
     /*-fx-min-width:      485px;*/
@@ -175,45 +151,12 @@ ScrollPane {
     -fx-vgap: 50px;
 }
 
-.button {
-    -fx-padding: 8px 15px;
-    -fx-margin: 15px;
-    -fx-margin-right: 30px;
-    -fx-border: 20px;
-    -fx-background-color: #2E64FE;
-}
 
-.label {
-    -fx-padding: 5px;
-    -fx-margin: 5px;
-    -fx-border: 10px;
-    -fx-spacing: 5px;
-}
 
-.text-field {
-    -fx-padding: 5px;
-    -fx-margin: 50px;
-    -fx-border: 10px;
-    -fx-spacing: 50px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 10px;
-}
 
-#save {
-    -fx-background-image: url("/data/Java-Logo-klein.PNG");
-    -fx-background-size: 30px 30px;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center 2.5px;
-}
 
-.nameLabel{
-    -fx-font-size: 26 !important;
-}
 
-Header Label{
-    -fx-font-size: 20;
-    -fx-text-fill: grey;
-}
+
 
 
 /*  WaterTank Style */
