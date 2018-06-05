@@ -57,7 +57,6 @@ public class PowerControl extends Region {
     private final DoubleProperty currentValue = new SimpleDoubleProperty();
 
     //blurType, color,radius,spread, offsetX, offsetY
-    private InnerShadow MY_INNER_SHADOW = new InnerShadow();
 
 
     private static DropShadow MY_SHADOW;
@@ -86,11 +85,8 @@ public class PowerControl extends Region {
     }
 
     private void initializeShadow() {
-        MY_INNER_SHADOW.setOffsetX(4);
-        MY_INNER_SHADOW.setOffsetY(4);
-        MY_INNER_SHADOW.setColor(Color.web("0x3b596d"));
 
-        MY_SHADOW = new DropShadow(BlurType.GAUSSIAN, Color.color(0, 0, 0, 0.25), 10d * (sizeFactor()), 0, 4, 4);
+
     }
 
     private void initializeSizes() {
@@ -154,7 +150,7 @@ public class PowerControl extends Region {
 
         //sub-zone initialisation
         arc = createZone(cx, cy, radius, 0.0f, 180.0f, Color.WHITE, ArcType.CHORD);
-        arc.setEffect(MY_INNER_SHADOW);                                     //Anfangspunkt  Zonengrösse
+                                        //Anfangspunkt  Zonengrösse
         redZone = createZone(cx, cy, radius - (radius / 10), 0.0f, 20.0f, Color.RED, ArcType.ROUND);
         orangeZone = createZone(cx, cy, radius - (radius / 10), 20.0f, 70.0f, Color.ORANGE, ArcType.ROUND);
         greenZone = createZone(cx, cy, radius - (radius / 10), 90.0f, 70.0f, Color.GREENYELLOW, ArcType.ROUND);
@@ -201,7 +197,7 @@ public class PowerControl extends Region {
     private void setupValueChangeListener() {
         currentValue.addListener((observable, oldValue, newValue) -> {
                     double state = (double) newValue;
-                    if (state <= 300 && state >= 0) {
+                    if (state <= 900 && state >= 0) {
 
                         drawingPane.getChildren().remove(powerControlCursor.getElements());
                         updateCursor();

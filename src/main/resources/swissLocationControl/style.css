@@ -1,5 +1,5 @@
 .swissLocationControl {
-    -fx-padding: 5;
+    -fx-padding: 0;
 }
 
 .coordinate-label {
@@ -28,7 +28,7 @@
 }
 
 .drawing-pane{
-    -fx-background-color: rgb(243,243,243);
+    -fx-background-color: rgb(244, 244, 244);
 }
 
 .kanton {

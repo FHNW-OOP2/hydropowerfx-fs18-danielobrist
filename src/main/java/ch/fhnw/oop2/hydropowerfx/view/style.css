@@ -1,5 +1,4 @@
 .root {
-
 }
 
 .header {
@@ -14,7 +13,6 @@
     -fx-padding: 8 8 8 8;
     -fx-hgap: 4;
     -fx-vgap: 4;
-
 }
 
 .label {
@@ -29,7 +27,6 @@
     -fx-background-insets: 0 0 -1 0, 0, 1;
     -fx-background-radius: 5, 5, 4;
     -fx-padding: 7 30 7 30;
-    -fx-text-fill: #242d35;
     -fx-font-family: "Helvetica";
     -fx-font-size: 12px;
     -fx-text-fill: lightgrey;
@@ -50,31 +47,62 @@
     linear-gradient(#768aa5 0%, #849cbb 5%, #5877a2 50%, #486a9a 51%, #4a6c9b 100%);
     -fx-text-fill: white;
 }
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: #a6b5c9,
+    linear-gradient(#303842 0%, #3e5577 20%, #375074 100%),
+    linear-gradient(#768aa5 0%, #849cbb 5%, #5877a2 50%, #486a9a 51%, #4a6c9b 100%);
+}
+.table-view .column-header .label{
+    -fx-label-padding: 8px;
+    -fx-text-fill: lightgrey;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+.table-view .column-header .label:hover{
+    -fx-label-padding: 8px;
+    -fx-font-weight: bold;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
 
-.table, .table-view, .tree-table-view {
-    /* Constants used throughout the tableview. */
-    -fx-table-header-border-color: transparent;
-    -fx-table-cell-border-color: -fx-box-border; /* Horizontal Lines*/
+}
+.table-view .cell{
+    -fx-cell-size: 35;
+    -fx-border-color: #F4F4F4;
+
+}
+.table-row-cell:selected {
+    -fx-background-color: #5877a2;
+    -fx-text-background-color: #ffffff;
+
+
+}
+/* scroll bar starts here */
+
+.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 2em;
+
+}
+
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
     -fx-background-color: transparent;
+    -fx-border-color:derive( #4a6c9b,80%);
+
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
 }
 
-.table .column-header-background .label {
-    -fx-background-color: transparent;
-    -fx-text-fill: black;
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #4a6c9b,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
 }
-
-.table, .table-view .show-hide-columns-button, .tree-table-view .show-hide-columns-button {
-    -fx-background-color: transparent;
-}
-
-
-
-
-.table-cell {
-    -fx-border-color: transparent;
-    -fx-border-width: 1;
-}
-
 
 /*  WaterTank Style */
 
