@@ -142,9 +142,9 @@ public class HydroForm extends GridPane implements ViewMixin {
         c1.setHgrow(Priority.ALWAYS);
         getColumnConstraints().addAll(c1, c2, c3);
 
-        c1.prefWidthProperty().bind(widthProperty().multiply(0.5));
-        c2.prefWidthProperty().bind(widthProperty().multiply(0.25));
-        c3.prefWidthProperty().bind(widthProperty().multiply(0.25));
+        c1.prefWidthProperty().bind(widthProperty().multiply(0.33));
+        c2.prefWidthProperty().bind(widthProperty().multiply(0.33));
+        c3.prefWidthProperty().bind(widthProperty().multiply(0.33));
 
 
         RowConstraints gc = new RowConstraints();

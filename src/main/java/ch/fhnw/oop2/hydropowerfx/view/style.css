@@ -1,6 +1,6 @@
 .root {
 }
-
+/* sections */
 .header {
     -fx-font-size: 10;
     -fx-background-color: #f4f4f4;
@@ -13,13 +13,12 @@
     -fx-padding: 8 8 8 8;
     -fx-hgap: 4;
     -fx-vgap: 4;
+    -fx-border: none;
+
 }
 
-.label {
-    -fx-text-fill: -fx-text-base-color;
-    -fx-font-weight: bold;
-}
 
+/* buttons */
 .button {
     -fx-background-color: #a6b5c9,
     linear-gradient(#303842 0%, #3e5577 20%, #375074 100%),
@@ -47,19 +46,36 @@
     linear-gradient(#768aa5 0%, #849cbb 5%, #5877a2 50%, #486a9a 51%, #4a6c9b 100%);
     -fx-text-fill: white;
 }
+
+/* text fields */
+.text-field {
+    -fx-background-color: -fx-text-box-border, -fx-background;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: grey;
+}
+
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-background;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+/* table view */
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-background-color: #a6b5c9,
     linear-gradient(#303842 0%, #3e5577 20%, #375074 100%),
     linear-gradient(#768aa5 0%, #849cbb 5%, #5877a2 50%, #486a9a 51%, #4a6c9b 100%);
 }
-.table-view .column-header .label{
+
+.table-view .column-header .label {
     -fx-label-padding: 8px;
     -fx-text-fill: lightgrey;
     -fx-font-weight: bold;
     -fx-alignment: CENTER_LEFT;
 }
-.table-view .column-header .label:hover{
+
+.table-view .column-header .label:hover {
     -fx-label-padding: 8px;
     -fx-font-weight: bold;
     -fx-scale-x: 1.02;
@@ -68,44 +84,44 @@
     -fx-text-fill: white;
 
 }
-.table-view .cell{
+
+.table-view .cell {
     -fx-cell-size: 35;
     -fx-border-color: #F4F4F4;
 
 }
+
 .table-row-cell:selected {
     -fx-background-color: #5877a2;
     -fx-text-background-color: #ffffff;
 
-
 }
-/* scroll bar starts here */
 
-.table-view .increment-button ,.table-view .decrement-button {
-    -fx-background-color:transparent;
+/* scroll bar */
+.table-view .increment-button, .table-view .decrement-button {
+    -fx-background-color: transparent;
     -fx-background-radius: 2em;
 
 }
 
 .table-view .scroll-bar:horizontal .track,
-.table-view .scroll-bar:vertical .track{
+.table-view .scroll-bar:vertical .track {
     -fx-background-color: transparent;
-    -fx-border-color:derive( #4a6c9b,80%);
+    -fx-border-color: derive(#4a6c9b, 80%);
 
     -fx-background-radius: 2em;
-    -fx-border-radius:2em;
+    -fx-border-radius: 2em;
 }
 
 .table-view .scroll-bar:horizontal .thumb,
 .table-view .scroll-bar:vertical .thumb {
-    -fx-background-color:derive( #4a6c9b,90%);
+    -fx-background-color: derive(#4a6c9b, 90%);
     -fx-background-insets: 2, 0, 0;
     -fx-background-radius: 2em;
 
 }
 
 /*  WaterTank Style */
-
 .watertank-control {
     -fx-padding: 5;
     -fx-background-color: transparent;
@@ -122,10 +138,9 @@
     -fx-fill: derive(-base-color, 90%);
 }
 
-.tank{
+.tank {
 
     -fx-fill: lightgrey;
-
 
 }
 
@@ -136,21 +151,19 @@
     -fx-fill: derive(white, 95%);
 }
 
-
-
-.water{
+.water {
     -fx-position: absolute;
     -fx-top: 50%;
     -fx-left: 50%;
     -fx-width: 240px;
     -fx-height: 350px;
     -fx-border: 6px;
-    -fx-border-style:solid;
+    -fx-border-style: solid;
     -fx-border-color: white;
     -fx-border-top: 6px;
-    -fx-border-style-top:solid;
+    -fx-border-style-top: solid;
     -fx-border-color-top: transparent;
-    -fx-border-radius : 10px;
+    -fx-border-radius: 10px;
     -fx-border-top-left-radius: 5px;
     -fx-border-top-right-radius: 5px;
     -fx-fill: url('../resources/image/Water.gif');
@@ -160,8 +173,7 @@
     -fx-animation: anim 20s ease-in-out infinite;
 }
 
-@keyframes anim{
-
+@keyframes anim {
 
     20% {
         -fx-background-position: 3000px 0px;
@@ -170,6 +182,5 @@
     100% {
         -fx-background-position: 6000px 350px;
     }
-
 
 }

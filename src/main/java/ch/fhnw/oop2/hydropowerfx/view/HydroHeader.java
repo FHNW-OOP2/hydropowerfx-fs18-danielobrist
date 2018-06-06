@@ -38,7 +38,7 @@ public class HydroHeader extends HBox implements ViewMixin {
         deleteButton = new Button("Delete");
         saveButton = new Button("Save");
         searchField = new TextField();
-        searchField.setPromptText("Suche");
+        searchField.setPromptText("Search (not working)");
 
         Tooltip addTooltip = new Tooltip("Erstellt eine neue leere Zeile.");
         addButton.setTooltip(addTooltip);

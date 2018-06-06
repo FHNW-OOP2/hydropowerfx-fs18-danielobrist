@@ -25,7 +25,6 @@ public class RootPanel extends BorderPane implements ViewMixin {
 
     @Override
     public void initializeSelf() {
-        addStylesheetFiles("splitpane.css");
         addStylesheetFiles("style.css");
     }
 
