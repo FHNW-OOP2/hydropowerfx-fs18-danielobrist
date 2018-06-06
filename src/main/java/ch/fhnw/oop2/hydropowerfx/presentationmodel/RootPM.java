@@ -16,6 +16,8 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.TableColumn;
 
 public class RootPM {
     private static final String FILE_NAME = "/data/HYDRO_POWERSTATION.csv";
@@ -103,9 +105,17 @@ public class RootPM {
 
 
     public void search(String searchtext) {
-        String searchTextSmall = searchtext.toLowerCase();
-        allPowerplants.stream().filter(item -> item.getName().toLowerCase() == searchTextSmall).findAny()
-                .ifPresent(item -> setSelectedPowerplantId(item.getPowerplantID()));
+        /*String searchTextSmall = searchtext.toLowerCase();
+        FilteredList<PowerplantsPM> filteredList = new FilteredList<>(data, p -> true);
+        filteredList.setPredicate(PowerplantsPM -> {
+            if (String.valueOf(PowerplantsPM.getName().toLowerCase().contains(searchtext))) {
+                return true;
+            } else if (String.valueOf(PowerplantsPM.getPowerplantStartFirst()).contains(searchtext)) {
+                return true;
+            }
+            return false;
+        });*/
+
     }
 
     //kraftwerke pro kanton zählen
