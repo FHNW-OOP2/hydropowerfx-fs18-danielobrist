@@ -5,7 +5,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
 import ch.fhnw.oop2.hydropowerfx.presentationmodel.RootPM;
-import javafx.stage.Stage;
 
 
 public class RootPanel extends BorderPane implements ViewMixin {
