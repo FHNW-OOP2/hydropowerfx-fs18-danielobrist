@@ -42,8 +42,8 @@ public class CantonTable extends VBox implements ViewMixin {
     private TableView<CantonPM> initializeTable() {
         TableView<CantonPM> tableView = new TableView<>(root.getAllCantons());
 
-        TableColumn<CantonPM, String> nameCol = new TableColumn<>("Name"); //Kollonen definieren
-        nameCol.setCellValueFactory(cell -> cell.getValue().cantonNameProperty());//Werte für die col liefern (gemiendeNamen in col 1)
+        TableColumn<CantonPM, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(cell -> cell.getValue().cantonNameProperty());
 
         TableColumn<CantonPM, Number> sumOfpowerplantsCol = new TableColumn<>("Anzahl Kraftwerke");
         sumOfpowerplantsCol.setCellValueFactory(cell -> cell.getValue().hydropowersPerCantonProperty());

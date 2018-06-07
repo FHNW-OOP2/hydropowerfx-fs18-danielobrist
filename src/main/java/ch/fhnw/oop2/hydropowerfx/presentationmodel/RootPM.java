@@ -96,11 +96,12 @@ public class RootPM {
 
     public void add() {
         allPowerplants.addAll(new PowerplantsPM(newHighestID(), ""));
-        setSelectedPowerplantId(newHighestID() - 1); //sets selection to new added row
+        setSelectedPowerplantId(newHighestID() - 1); //sets selection to row with highest ID
     }
 
     public void delete() {
         allPowerplants.remove(getPowerplant(getSelectedPowerplantId()));
+        setSelectedPowerplantId(newHighestID() - 1); //sets selection to row with highest ID
     }
 
 
@@ -266,6 +267,7 @@ public class RootPM {
     public void setSelectedPowerplantId(int selectedPowerplantId) {
         this.selectedPowerplantId.set(selectedPowerplantId);
     }
+
     public boolean isFocusLatitude() {
         return focusLatitude.get();
     }
@@ -289,7 +291,6 @@ public class RootPM {
     public void setFocusLongitude(boolean focusLongitude) {
         this.focusLongitude.set(focusLongitude);
     }
-
 
 
 }

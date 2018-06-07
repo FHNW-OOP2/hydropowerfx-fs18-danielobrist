@@ -73,15 +73,16 @@ public class HydroHeader extends HBox implements ViewMixin {
     public void setupBindings() {
 
     }
+
     public void setupValueChangedListeners() {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue != oldValue) {
+            if (newValue != oldValue) {
                 root.search(getSearchString());
             }
         });
     }
 
-        public String getSearchString() {
+    public String getSearchString() {
         return searchField.getText();
     }
 

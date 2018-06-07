@@ -52,9 +52,7 @@ public class RootPanel extends BorderPane implements ViewMixin {
         setTop(header);
 
 
-
     }
-
 
 
 }

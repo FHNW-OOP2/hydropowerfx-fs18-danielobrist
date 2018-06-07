@@ -7,28 +7,34 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RootPMTest {
+    private RootPM sut;
+    private PowerplantsPM powerplantOne;
+    private PowerplantsPM powerplantTwo;
+
     @BeforeEach
     void setUp() {
         sut = new RootPM();
+        powerplantOne = new PowerplantsPM(1, "AG");
+        powerplantTwo = new PowerplantsPM(2, "AG");
     }
-    private RootPM sut;
+
 
     @Test
-    void testGetWasserkraftwerke(){
+    void testGetWasserkraftwerke() {
 
         // given
-        ObservableList<PowerplantsPM> wasserkraftwerke = sut.getAllPowerplants(); // sut = subject under test
+        ObservableList<PowerplantsPM> wasserkraftwerke = sut.getAllPowerplants();
 
         //when
         assertTrue(wasserkraftwerke.size() > 1);
 
         //then
         assertEquals("Val Giuf", wasserkraftwerke.get(0).getName());
-        assertEquals("Chasseras", wasserkraftwerke.get(wasserkraftwerke.size()-1).getName());
+        assertEquals("Chasseras", wasserkraftwerke.get(wasserkraftwerke.size() - 1).getName());
     }
 
     @Test
-    void testSave(){
+    void testSave() {
         //given
 
         //when

@@ -37,7 +37,7 @@ public class PowerControl extends Region {
     private static final double ARTBOARD_SIZE = 200;//figma frame_width
 
     private static final double PREFERRED_SIZE = ARTBOARD_SIZE;
-    private static final double MINIMUM_SIZE = 14;
+    private static final double MINIMUM_SIZE = 10;
     private static final double MAXIMUM_SIZE = 800;
 
     //part of my graphic (see figma)

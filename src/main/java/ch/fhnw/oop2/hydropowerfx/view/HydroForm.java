@@ -154,13 +154,13 @@ public class HydroForm extends GridPane implements ViewMixin {
         add(nameIndex, 0, 0, 2, 1);
         add(operationstartFirstIndex, 2, 0);
 
-        add(siteCantonIndex, 0,1);
+        add(siteCantonIndex, 0, 1);
         add(maxPowerIndex, 1, 1);
         add(maxWaterIndex, 2, 1);
 
         add(swisslocation, 0, 2);
         add(watertankcontrol, 2, 2);
-        add(hydropower,1,2);
+        add(hydropower, 1, 2);
 
         add(nameLabel, 0, 3);
         add(nameField, 0, 4);
@@ -250,6 +250,7 @@ public class HydroForm extends GridPane implements ViewMixin {
                 startLastField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+
 
         maxPowerField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != oldValue) {
